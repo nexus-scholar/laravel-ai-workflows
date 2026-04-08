@@ -1,15 +1,15 @@
 <?php
 
-namespace NexusScholar\AiChain\Jobs;
+namespace Nexus\AiChain\Jobs;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use NexusScholar\AiChain\Graph\CompiledGraph;
-use NexusScholar\AiChain\Graph\State;
-use NexusScholar\AiChain\Graph\StateGraph;
+use Nexus\AiChain\Graph\CompiledGraph;
+use Nexus\AiChain\Graph\State;
+use Nexus\AiChain\Graph\StateGraph;
 
 class RunGraphNode implements ShouldQueue
 {
@@ -17,9 +17,9 @@ class RunGraphNode implements ShouldQueue
 
     public function __construct(
         private readonly CompiledGraph $graph,
-        private readonly State         $state,
-        private readonly string        $currentNode,
-        private readonly string        $runId,
+        private readonly State $state,
+        private readonly string $currentNode,
+        private readonly string $runId,
     ) {}
 
     public function handle(): void

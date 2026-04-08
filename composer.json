@@ -1,5 +1,5 @@
 {
-    "name": "nexus-scholar/laravel-ai-chain",
+    "name": "nexus/laravel-ai-chain",
     "description": "LangChain + LangGraph port for Laravel, built on top of laravel/ai",
     "type": "library",
     "license": "MIT",
@@ -18,21 +18,21 @@
     },
     "autoload": {
         "psr-4": {
-            "NexusScholar\\AiChain\\": "src/"
+            "Nexus\\AiChain\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "NexusScholar\\AiChain\\Tests\\": "tests/"
+            "Nexus\\AiChain\\Tests\\": "tests/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "NexusScholar\\AiChain\\AiChainServiceProvider"
+                "Nexus\\AiChain\\AiChainServiceProvider"
             ],
             "aliases": {
-                "AiChain": "NexusScholar\\AiChain\\Facades\\Chain"
+                "AiChain": "Nexus\\AiChain\\Facades\\Chain"
             }
         }
     },

@@ -1,20 +1,21 @@
 <?php
 
-namespace NexusScholar\AiChain\Graph;
+namespace Nexus\AiChain\Graph;
 
 use Generator;
+use Nexus\AiChain\Contracts\Checkpointable;
+use Nexus\AiChain\Contracts\Node;
 use RuntimeException;
-use NexusScholar\AiChain\Contracts\Node;
-use NexusScholar\AiChain\Contracts\Checkpointable;
 
 final class CompiledGraph
 {
-    private ?Checkpointable $checkpoint    = null;
-    private int             $maxIterations = 50;
+    private ?Checkpointable $checkpoint = null;
+
+    private int $maxIterations = 50;
 
     public function __construct(
-        private readonly array  $nodes,
-        private readonly array  $edges,
+        private readonly array $nodes,
+        private readonly array $edges,
         private readonly string $entryPoint,
     ) {}
 
@@ -22,6 +23,7 @@ final class CompiledGraph
     {
         $clone = clone $this;
         $clone->checkpoint = $checkpoint;
+
         return $clone;
     }
 
@@ -29,14 +31,15 @@ final class CompiledGraph
     {
         $clone = clone $this;
         $clone->maxIterations = $max;
+
         return $clone;
     }
 
     public function invoke(State $initialState, ?string $runId = null): State
     {
-        $state       = $initialState;
+        $state = $initialState;
         $currentNode = $this->entryPoint;
-        $iterations  = 0;
+        $iterations = 0;
 
         while ($currentNode !== StateGraph::END) {
             if ($iterations >= $this->maxIterations) {
@@ -44,7 +47,7 @@ final class CompiledGraph
             }
 
             $state = $this->executeNode($currentNode, $state);
-            
+
             if ($this->checkpoint && $runId) {
                 $this->checkpoint->save($runId, $currentNode, $state);
             }
@@ -58,17 +61,17 @@ final class CompiledGraph
 
     public function stream(State $initialState, ?string $runId = null): Generator
     {
-        $state       = $initialState;
+        $state = $initialState;
         $currentNode = $this->entryPoint;
-        $iterations  = 0;
+        $iterations = 0;
 
         while ($currentNode !== StateGraph::END) {
             if ($iterations >= $this->maxIterations) {
-                throw new RuntimeException("Max iterations reached.");
+                throw new RuntimeException('Max iterations reached.');
             }
 
             $state = $this->executeNode($currentNode, $state);
-            
+
             if ($this->checkpoint && $runId) {
                 $this->checkpoint->save($runId, $currentNode, $state);
             }

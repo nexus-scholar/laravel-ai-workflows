@@ -1,11 +1,13 @@
 <?php
 
-namespace NexusScholar\AiChain\Contracts;
+namespace Nexus\AiChain\Contracts;
+
+use Nexus\AiChain\Retrieval\Document;
 
 interface Retriever
 {
     /**
-     * @return \NexusScholar\AiChain\Retrieval\Document[]
+     * @return Document[]
      */
     public function retrieve(string $query, int $topK = 5): array;
 }

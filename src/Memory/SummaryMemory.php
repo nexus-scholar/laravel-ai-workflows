@@ -1,8 +1,8 @@
 <?php
 
-namespace NexusScholar\AiChain\Memory;
+namespace Nexus\AiChain\Memory;
 
-use NexusScholar\AiChain\Contracts\Memory;
+use Nexus\AiChain\Contracts\Memory;
 
 /**
  * Compresses old messages into a rolling summary using an LLM.
@@ -10,15 +10,16 @@ use NexusScholar\AiChain\Contracts\Memory;
  */
 final class SummaryMemory implements Memory
 {
-    private string $summary  = '';
-    private array  $messages = [];
+    private string $summary = '';
+
+    private array $messages = [];
 
     /**
-     * @param callable $summarizer A callable that receives (string $history, string $previousSummary) and returns string.
+     * @param  callable  $summarizer  A callable that receives (string $history, string $previousSummary) and returns string.
      */
     public function __construct(
         private readonly mixed $summarizer,
-        private readonly int   $summarizeAfter = 10,
+        private readonly int $summarizeAfter = 10,
     ) {}
 
     public function add(string $role, string $content): void
@@ -37,7 +38,7 @@ final class SummaryMemory implements Memory
 
     public function clear(): void
     {
-        $this->summary  = '';
+        $this->summary = '';
         $this->messages = [];
     }
 
@@ -49,7 +50,7 @@ final class SummaryMemory implements Memory
             $parts[] = "SUMMARY OF EARLIER CONVERSATION:\n{$this->summary}";
         }
 
-        if (!empty($this->messages)) {
+        if (! empty($this->messages)) {
             $parts[] = $this->messagesAsString($this->messages);
         }
 
@@ -58,7 +59,7 @@ final class SummaryMemory implements Memory
 
     private function compress(): void
     {
-        $toCompress   = array_splice($this->messages, 0, $this->summarizeAfter / 2); // Keep half
+        $toCompress = array_splice($this->messages, 0, $this->summarizeAfter / 2); // Keep half
         $conversation = $this->messagesAsString($toCompress);
 
         $this->summary = ($this->summarizer)($conversation, $this->summary);
@@ -67,7 +68,7 @@ final class SummaryMemory implements Memory
     private function messagesAsString(array $messages): string
     {
         return implode("\n", array_map(
-            fn ($m) => strtoupper($m['role']) . ': ' . $m['content'],
+            fn ($m) => strtoupper($m['role']).': '.$m['content'],
             $messages
         ));
     }

@@ -1,13 +1,13 @@
 <?php
 
-namespace NexusScholar\AiChain\Retrieval;
+namespace Nexus\AiChain\Retrieval;
 
 final readonly class Document
 {
     public function __construct(
         public string $content,
-        public array  $metadata = [],
-        public ?float $score    = null,
+        public array $metadata = [],
+        public ?float $score = null,
     ) {}
 
     public function withScore(float $score): self

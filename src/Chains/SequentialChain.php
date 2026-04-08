@@ -1,8 +1,8 @@
 <?php
 
-namespace NexusScholar\AiChain\Chains;
+namespace Nexus\AiChain\Chains;
 
-use NexusScholar\AiChain\Contracts\Chain as ChainContract;
+use Nexus\AiChain\Contracts\Chain as ChainContract;
 
 /**
  * Pipes multiple chains together.
@@ -30,7 +30,7 @@ final class SequentialChain implements ChainContract
         // Stream only the final chain
         $state = $inputs;
         $chains = $this->chains;
-        $last   = array_pop($chains);
+        $last = array_pop($chains);
 
         foreach ($chains as $chain) {
             $state[$chain->outputKey()] = $chain->run($state);

@@ -1,6 +1,6 @@
 <?php
 
-namespace NexusScholar\AiChain;
+namespace Nexus\AiChain;
 
 use Illuminate\Support\ServiceProvider;
 

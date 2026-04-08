@@ -1,8 +1,8 @@
 <?php
 
-namespace NexusScholar\AiChain\Memory;
+namespace Nexus\AiChain\Memory;
 
-use NexusScholar\AiChain\Contracts\Memory;
+use Nexus\AiChain\Contracts\Memory;
 
 final class InMemoryConversation implements Memory
 {
@@ -26,7 +26,7 @@ final class InMemoryConversation implements Memory
     public function asString(): string
     {
         return implode("\n", array_map(
-            fn ($m) => strtoupper($m['role']) . ': ' . $m['content'],
+            fn ($m) => strtoupper($m['role']).': '.$m['content'],
             $this->messages
         ));
     }

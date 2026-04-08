@@ -1,11 +1,11 @@
 <?php
 
-namespace NexusScholar\AiChain\Graph\Runners;
+namespace Nexus\AiChain\Graph\Runners;
 
 use Illuminate\Support\Str;
-use NexusScholar\AiChain\Graph\CompiledGraph;
-use NexusScholar\AiChain\Graph\State;
-use NexusScholar\AiChain\Jobs\RunGraphNode;
+use Nexus\AiChain\Graph\CompiledGraph;
+use Nexus\AiChain\Graph\State;
+use Nexus\AiChain\Jobs\RunGraphNode;
 
 final class QueueRunner
 {

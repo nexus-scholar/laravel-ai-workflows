@@ -2,13 +2,10 @@
 
 declare(strict_types=1);
 
-namespace NexusScholar\AiChain\Tests\Unit\Retrieval;
+namespace Nexus\AiChain\Tests\Unit\Retrieval;
 
-use Mockery;
-use Laravel\Ai\Store;
-use Laravel\Ai\Responses\Data\SearchResult;
-use NexusScholar\AiChain\Retrieval\VectorStoreRetriever;
-use NexusScholar\AiChain\Tests\TestCase;
+use Nexus\AiChain\Retrieval\VectorStoreRetriever;
+use Nexus\AiChain\Tests\TestCase;
 
 class VectorStoreRetrieverTest extends TestCase
 {
@@ -28,7 +25,7 @@ class VectorStoreRetrieverTest extends TestCase
         expect($results[0]->content)->toBe('content 1');
         expect($results[0]->score)->toBe(0.9);
         expect($results[0]->metadata)->toBe(['id' => 1]);
-        
+
         expect($results[1]->content)->toBe('content 2');
         expect($results[1]->score)->toBe(0.8);
         expect($results[1]->metadata)->toBe(['id' => 2]);

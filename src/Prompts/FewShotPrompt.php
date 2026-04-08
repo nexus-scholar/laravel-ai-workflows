@@ -1,12 +1,12 @@
 <?php
 
-namespace NexusScholar\AiChain\Prompts;
+namespace Nexus\AiChain\Prompts;
 
 final class FewShotPrompt
 {
     public function __construct(
         private readonly string $prefix,
-        private readonly array  $examples,
+        private readonly array $examples,
         private readonly string $suffix,
         private readonly string $separator = "\n\n",
     ) {}
@@ -22,6 +22,6 @@ final class FewShotPrompt
         }
         $parts[] = $suffix;
 
-        return implode($this->separator, array_filter($parts, fn($p) => trim($p) !== ''));
+        return implode($this->separator, array_filter($parts, fn ($p) => trim($p) !== ''));
     }
 }

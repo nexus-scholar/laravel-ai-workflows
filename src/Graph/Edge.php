@@ -1,14 +1,14 @@
 <?php
 
-namespace NexusScholar\AiChain\Graph;
+namespace Nexus\AiChain\Graph;
 
 use Closure;
 
 final readonly class Edge
 {
     public function __construct(
-        public string   $from,
-        public ?string  $to = null,
+        public string $from,
+        public ?string $to = null,
         public ?Closure $condition = null,
     ) {}
 

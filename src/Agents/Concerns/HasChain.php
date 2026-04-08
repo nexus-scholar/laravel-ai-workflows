@@ -1,10 +1,10 @@
 <?php
 
-namespace NexusScholar\AiChain\Agents\Concerns;
+namespace Nexus\AiChain\Agents\Concerns;
 
-use NexusScholar\AiChain\Contracts\Chain;
-use NexusScholar\AiChain\Contracts\Memory;
-use NexusScholar\AiChain\Contracts\Retriever;
+use Nexus\AiChain\Contracts\Chain;
+use Nexus\AiChain\Contracts\Memory;
+use Nexus\AiChain\Contracts\Retriever;
 
 trait HasChain
 {
@@ -13,6 +13,7 @@ trait HasChain
     public function withChain(Chain $chain): self
     {
         $this->chain = $chain;
+
         return $this;
     }
 
@@ -24,12 +25,14 @@ trait HasChain
     public function withMemory(Memory $memory): self
     {
         $this->chain = $this->chain->withMemory($memory);
+
         return $this;
     }
 
     public function withRetriever(Retriever $retriever, int $topK = 5): self
     {
         $this->chain = $this->chain->withRetriever($retriever, $topK);
+
         return $this;
     }
 }

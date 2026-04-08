@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace NexusScholar\AiChain\Tests\Unit\Tools;
+namespace Nexus\AiChain\Tests\Unit\Tools;
 
 use Illuminate\JsonSchema\JsonSchemaTypeFactory;
 use Laravel\Ai\Tools\Request;
 use Mockery;
-use NexusScholar\AiChain\Contracts\Chain;
-use NexusScholar\AiChain\Tools\ChainTool;
-use NexusScholar\AiChain\Tests\TestCase;
+use Nexus\AiChain\Contracts\Chain;
+use Nexus\AiChain\Tests\TestCase;
+use Nexus\AiChain\Tools\ChainTool;
 
 class ChainToolTest extends TestCase
 {
@@ -20,7 +20,7 @@ class ChainToolTest extends TestCase
         $chain->shouldReceive('inputKeys')->andReturn(['input']);
 
         $tool = new ChainTool($chain, 'my_tool', 'description');
-        
+
         $request = new Request(['input' => 'test']);
         $result = $tool->handle($request);
 
@@ -33,7 +33,7 @@ class ChainToolTest extends TestCase
         $chain->shouldReceive('inputKeys')->andReturn(['foo', 'bar']);
 
         $tool = new ChainTool($chain, 'my_tool', 'description');
-        
+
         $schema = $tool->schema(new JsonSchemaTypeFactory);
 
         expect($schema)->toHaveKeys(['foo', 'bar']);

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-use NexusScholar\AiChain\Memory\InMemoryConversation;
+use Nexus\AiChain\Memory\InMemoryConversation;
 
 it('adds and retrieves messages', function () {
-    $memory = new InMemoryConversation();
+    $memory = new InMemoryConversation;
     $memory->add('human', 'Hi');
     $memory->add('ai', 'Hello');
 
@@ -16,7 +16,7 @@ it('adds and retrieves messages', function () {
 });
 
 it('formats messages as string', function () {
-    $memory = new InMemoryConversation();
+    $memory = new InMemoryConversation;
     $memory->add('human', 'Hi');
     $memory->add('ai', 'Hello');
 
@@ -24,7 +24,7 @@ it('formats messages as string', function () {
 });
 
 it('clears messages', function () {
-    $memory = new InMemoryConversation();
+    $memory = new InMemoryConversation;
     $memory->add('human', 'Hi');
     $memory->clear();
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace NexusScholar\AiChain\Contracts;
+namespace Nexus\AiChain\Contracts;
 
 interface Memory
 {

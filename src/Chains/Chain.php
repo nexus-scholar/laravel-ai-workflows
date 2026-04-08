@@ -1,20 +1,24 @@
 <?php
 
-namespace NexusScholar\AiChain\Chains;
+namespace Nexus\AiChain\Chains;
 
-use NexusScholar\AiChain\Contracts\Chain as ChainContract;
-use NexusScholar\AiChain\Prompts\PromptTemplate;
+use Nexus\AiChain\Contracts\Chain as ChainContract;
+use Nexus\AiChain\Contracts\Memory;
+use Nexus\AiChain\Contracts\Retriever;
+use Nexus\AiChain\Prompts\PromptTemplate;
 
 final class Chain implements ChainContract
 {
-    private ?\NexusScholar\AiChain\Contracts\Memory    $memory    = null;
-    private ?\NexusScholar\AiChain\Contracts\Retriever $retriever = null;
-    private int        $topK      = 5;
+    private ?Memory $memory = null;
+
+    private ?Retriever $retriever = null;
+
+    private int $topK = 5;
 
     private function __construct(
-        private readonly object         $agent,
+        private readonly object $agent,
         private readonly PromptTemplate $promptTemplate,
-        private readonly string         $outputKey = 'output',
+        private readonly string $outputKey = 'output',
     ) {}
 
     public static function make(
@@ -25,26 +29,28 @@ final class Chain implements ChainContract
         return new self($agent, $promptTemplate, $outputKey);
     }
 
-    public function withMemory(\NexusScholar\AiChain\Contracts\Memory $memory): self
+    public function withMemory(Memory $memory): self
     {
         $clone = clone $this;
         $clone->memory = $memory;
+
         return $clone;
     }
 
-    public function withRetriever(\NexusScholar\AiChain\Contracts\Retriever $retriever, int $topK = 5): self
+    public function withRetriever(Retriever $retriever, int $topK = 5): self
     {
         $clone = clone $this;
-        $clone->retriever  = $retriever;
-        $clone->topK       = $topK;
+        $clone->retriever = $retriever;
+        $clone->topK = $topK;
+
         return $clone;
     }
 
     public function run(array $inputs): mixed
     {
         $augmented = $this->augmentInputs($inputs);
-        $prompt    = $this->promptTemplate->format($augmented);
-        
+        $prompt = $this->promptTemplate->format($augmented);
+
         $response = $this->agent->prompt($prompt);
         $raw = $response->text();
 
@@ -62,7 +68,7 @@ final class Chain implements ChainContract
     public function stream(array $inputs): \Generator
     {
         $augmented = $this->augmentInputs($inputs);
-        $prompt    = $this->promptTemplate->format($augmented);
+        $prompt = $this->promptTemplate->format($augmented);
 
         foreach ($this->agent->stream($prompt) as $chunk) {
             yield $chunk->text();
@@ -72,8 +78,13 @@ final class Chain implements ChainContract
     public function inputKeys(): array
     {
         $keys = $this->promptTemplate->inputVariables();
-        if ($this->retriever) $keys[] = 'context';
-        if ($this->memory) $keys[] = 'history';
+        if ($this->retriever) {
+            $keys[] = 'context';
+        }
+        if ($this->memory) {
+            $keys[] = 'history';
+        }
+
         return array_unique($keys);
     }
 
@@ -86,7 +97,7 @@ final class Chain implements ChainContract
     {
         if ($this->retriever !== null) {
             $query = $inputs['input'] ?? array_values($inputs)[0];
-            $docs  = $this->retriever->retrieve((string) $query, $this->topK);
+            $docs = $this->retriever->retrieve((string) $query, $this->topK);
             $inputs['context'] = implode("\n\n", array_map(fn ($d) => $d->content, $docs));
         }
 

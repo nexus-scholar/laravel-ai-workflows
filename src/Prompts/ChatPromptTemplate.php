@@ -1,6 +1,6 @@
 <?php
 
-namespace NexusScholar\AiChain\Prompts;
+namespace Nexus\AiChain\Prompts;
 
 final class ChatPromptTemplate
 {
@@ -22,6 +22,7 @@ final class ChatPromptTemplate
     {
         return array_map(function (array $message) use ($values) {
             $tpl = PromptTemplate::from($message['template']);
+
             return ['role' => $message['role'], 'content' => $tpl->format($values)];
         }, $this->messages);
     }

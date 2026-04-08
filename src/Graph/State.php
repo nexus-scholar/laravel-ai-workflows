@@ -1,6 +1,6 @@
 <?php
 
-namespace NexusScholar\AiChain\Graph;
+namespace Nexus\AiChain\Graph;
 
 /**
  * Base class for all graph states.

@@ -1,9 +1,9 @@
 <?php
 
-namespace NexusScholar\AiChain\Memory;
+namespace Nexus\AiChain\Memory;
 
 use Illuminate\Support\Facades\Cache;
-use NexusScholar\AiChain\Contracts\Memory;
+use Nexus\AiChain\Contracts\Memory;
 
 final class CacheConversationMemory implements Memory
 {
@@ -11,9 +11,9 @@ final class CacheConversationMemory implements Memory
 
     public function __construct(
         private readonly string $sessionId,
-        private readonly int    $maxMessages = 20,
-        private readonly string $store       = 'file', // Default to file for broader compatibility
-        private readonly int    $ttl         = 3600,
+        private readonly int $maxMessages = 20,
+        private readonly string $store = 'file', // Default to file for broader compatibility
+        private readonly int $ttl = 3600,
     ) {
         $this->messages = Cache::store($this->store)
             ->get("ai_memory:{$this->sessionId}", []);
@@ -46,7 +46,7 @@ final class CacheConversationMemory implements Memory
     public function asString(): string
     {
         return implode("\n", array_map(
-            fn ($m) => strtoupper($m['role']) . ': ' . $m['content'],
+            fn ($m) => strtoupper($m['role']).': '.$m['content'],
             $this->messages
         ));
     }

@@ -2,17 +2,18 @@
 
 declare(strict_types=1);
 
-use NexusScholar\AiChain\Memory\SummaryMemory;
+use Nexus\AiChain\Memory\SummaryMemory;
 
 it('calls summarizer when threshold is reached', function () {
     $summarizerCalled = false;
     $summarizer = function ($history, $prev) use (&$summarizerCalled) {
         $summarizerCalled = true;
-        return 'Summary: ' . strlen($history);
+
+        return 'Summary: '.strlen($history);
     };
 
     $memory = new SummaryMemory($summarizer, summarizeAfter: 2);
-    
+
     $memory->add('human', 'Hi');
     expect($summarizerCalled)->toBeFalse();
 
@@ -22,7 +23,7 @@ it('calls summarizer when threshold is reached', function () {
 });
 
 it('preserves recent messages after summarization', function () {
-    $summarizer = fn($h, $p) => 'Short summary';
+    $summarizer = fn ($h, $p) => 'Short summary';
     $memory = new SummaryMemory($summarizer, summarizeAfter: 4);
 
     $memory->add('h', '1');

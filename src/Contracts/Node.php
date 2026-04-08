@@ -1,8 +1,8 @@
 <?php
 
-namespace NexusScholar\AiChain\Contracts;
+namespace Nexus\AiChain\Contracts;
 
-use NexusScholar\AiChain\Graph\State;
+use Nexus\AiChain\Graph\State;
 
 interface Node
 {
