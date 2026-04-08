@@ -3,7 +3,6 @@
 namespace NexusScholar\AiChain\Chains;
 
 use NexusScholar\AiChain\Contracts\Chain as ChainContract;
-use NexusScholar\AiChain\Contracts\OutputParser;
 use NexusScholar\AiChain\Prompts\PromptTemplate;
 
 final class Chain implements ChainContract
@@ -13,19 +12,17 @@ final class Chain implements ChainContract
     private int        $topK      = 5;
 
     private function __construct(
-        private readonly object       $agent,
+        private readonly object         $agent,
         private readonly PromptTemplate $promptTemplate,
-        private readonly OutputParser   $parser,
         private readonly string         $outputKey = 'output',
     ) {}
 
     public static function make(
         object $agent,
         PromptTemplate $promptTemplate,
-        OutputParser $parser,
         string $outputKey = 'output',
     ): self {
-        return new self($agent, $promptTemplate, $parser, $outputKey);
+        return new self($agent, $promptTemplate, $outputKey);
     }
 
     public function withMemory(\NexusScholar\AiChain\Contracts\Memory $memory): self
@@ -48,29 +45,24 @@ final class Chain implements ChainContract
         $augmented = $this->augmentInputs($inputs);
         $prompt    = $this->promptTemplate->format($augmented);
         
-        $instructions = $this->parser->formatInstructions();
-        if ($instructions !== '') {
-            $prompt .= "\n\n" . $instructions;
-        }
-
         $response = $this->agent->prompt($prompt);
         $raw = $response->text();
 
         $this->memory?->add('human', (string) ($inputs['input'] ?? array_values($inputs)[0]));
         $this->memory?->add('ai', $raw);
 
-        return $this->parser->parse($raw);
+        // Native structured output via laravel/ai
+        if (isset($response->structured)) {
+            return $response->structured;
+        }
+
+        return $raw;
     }
 
     public function stream(array $inputs): \Generator
     {
         $augmented = $this->augmentInputs($inputs);
         $prompt    = $this->promptTemplate->format($augmented);
-        
-        $instructions = $this->parser->formatInstructions();
-        if ($instructions !== '') {
-            $prompt .= "\n\n" . $instructions;
-        }
 
         foreach ($this->agent->stream($prompt) as $chunk) {
             yield $chunk->text();
