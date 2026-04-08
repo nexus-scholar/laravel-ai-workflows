@@ -1,0 +1,46 @@
+{
+    "name": "nexus-scholar/laravel-ai-chain",
+    "description": "LangChain + LangGraph port for Laravel, built on top of laravel/ai",
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "php": "^8.3",
+        "laravel/ai": "^0.4.4",
+        "laravel/framework": "^13.0",
+        "laravel/tinker": "^3.0"
+    },
+    "require-dev": {
+        "pestphp/pest": "*",
+        "orchestra/testbench": "*",
+        "laravel/pail": "^1.2.5",
+        "laravel/pint": "^1.27",
+        "mockery/mockery": "^1.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "NexusScholar\\AiChain\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "NexusScholar\\AiChain\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "NexusScholar\\AiChain\\AiChainServiceProvider"
+            ],
+            "aliases": {
+                "AiChain": "NexusScholar\\AiChain\\Facades\\Chain"
+            }
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
+}
