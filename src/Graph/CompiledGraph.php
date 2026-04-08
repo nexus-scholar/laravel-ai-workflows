@@ -80,7 +80,7 @@ final class CompiledGraph
         }
     }
 
-    private function executeNode(string $name, State $state): State
+    public function executeNode(string $name, State $state): State
     {
         $node = $this->nodes[$name];
 
@@ -91,7 +91,7 @@ final class CompiledGraph
         return $node($state);
     }
 
-    private function resolveNextNode(string $currentNode, State $state): string
+    public function resolveNextNode(string $currentNode, State $state): string
     {
         $edges = $this->edges[$currentNode] ?? [];
 
@@ -108,5 +108,15 @@ final class CompiledGraph
         }
 
         return StateGraph::END;
+    }
+
+    public function entryPoint(): string
+    {
+        return $this->entryPoint;
+    }
+
+    public function checkpoint(): ?Checkpointable
+    {
+        return $this->checkpoint;
     }
 }

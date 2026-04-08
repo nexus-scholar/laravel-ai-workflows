@@ -8,12 +8,14 @@ use NexusScholar\AiChain\Graph\State;
 use NexusScholar\AiChain\Graph\StateGraph;
 use NexusScholar\AiChain\Tests\TestCase;
 
-class CounterState extends State
-{
-    public function __construct(public int $count = 0) {}
+if (!class_exists(CounterState::class)) {
+    class CounterState extends State
+    {
+        public function __construct(public int $count = 0) {}
 
-    public function toArray(): array { return ['count' => $this->count]; }
-    public static function fromArray(array $data): static { return new self($data['count']); }
+        public function toArray(): array { return ['count' => $this->count]; }
+        public static function fromArray(array $data): static { return new self($data['count']); }
+    }
 }
 
 it('executes a linear graph', function () {
