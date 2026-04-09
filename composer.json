@@ -33,7 +33,7 @@
         "mockery/mockery": "^1.6"
     },
     "scripts": {
-        "test": "vendor/bin/pest",
+        "test": "vendor/bin/pest --configuration=phpunit.xml",
         "pint": "vendor/bin/pint --test src",
         "pint:all": "vendor/bin/pint",
         "stan": "vendor/bin/phpstan analyse --memory-limit=512M"
@@ -61,6 +61,9 @@
     "minimum-stability": "stable",
     "prefer-stable": true,
     "config": {
+        "platform": {
+            "php": "8.3.0"
+        },
         "allow-plugins": {
             "pestphp/pest-plugin": true
         }
