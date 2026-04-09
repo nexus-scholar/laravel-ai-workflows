@@ -4,6 +4,9 @@ namespace Nexus\Workflow\Chains;
 
 use InvalidArgumentException;
 use Laravel\Ai\Contracts\Agent;
+use Laravel\Ai\Contracts\HasStructuredOutput;
+use Nexus\Workflow\Chains\Support\ProviderOptionsAgent;
+use Nexus\Workflow\Chains\Support\StructuredProviderOptionsAgent;
 use Nexus\Workflow\Contracts\Chain as ChainContract;
 use Nexus\Workflow\Contracts\Memory;
 use Nexus\Workflow\Contracts\Retriever;
@@ -12,6 +15,12 @@ use Stringable;
 
 final class Chain implements ChainContract
 {
+    /**
+     * Boundary note: this class is orchestration-only.
+     *
+     * It composes prompt data and forwards execution to Laravel AI agents.
+     * Provider transport concerns (HTTP clients, request signing, retries) must stay in the SDK/provider layer.
+     */
     private ?Memory $memory = null;
 
     private ?Retriever $retriever = null;
@@ -21,6 +30,23 @@ final class Chain implements ChainContract
     private string|array|null $provider = null;
 
     private ?string $model = null;
+
+    private ?int $timeout = null;
+
+    /**
+     * @var array<int, mixed>
+     */
+    private array $attachments = [];
+
+    /**
+     * @var array<string, array<string, mixed>>
+     */
+    private array $providerOptions = [];
+
+    /**
+     * @var (callable(\Laravel\Ai\Enums\Lab|string, array<string, mixed>, Agent): array<string, mixed>)|null
+     */
+    private $providerOptionsResolver = null;
 
     private function __construct(
         private readonly Agent $agent,
@@ -62,6 +88,47 @@ final class Chain implements ChainContract
         return $clone;
     }
 
+    public function withTimeout(?int $timeout): self
+    {
+        $clone = clone $this;
+        $clone->timeout = $timeout;
+
+        return $clone;
+    }
+
+    /**
+     * @param array<int, mixed> $attachments
+     */
+    public function withAttachments(array $attachments): self
+    {
+        $clone = clone $this;
+        $clone->attachments = $attachments;
+
+        return $clone;
+    }
+
+    /**
+     * @param array<string, array<string, mixed>> $providerOptions
+     */
+    public function withProviderOptions(array $providerOptions): self
+    {
+        $clone = clone $this;
+        $clone->providerOptions = $providerOptions;
+
+        return $clone;
+    }
+
+    /**
+     * @param callable(\Laravel\Ai\Enums\Lab|string, array<string, mixed>, Agent): array<string, mixed> $resolver
+     */
+    public function withProviderOptionsResolver(callable $resolver): self
+    {
+        $clone = clone $this;
+        $clone->providerOptionsResolver = $resolver;
+
+        return $clone;
+    }
+
     public function withMemory(Memory $memory): self
     {
         $clone = clone $this;
@@ -81,14 +148,11 @@ final class Chain implements ChainContract
 
     public function run(array $inputs): mixed
     {
+        $agent = $this->resolveAgent();
         $augmented = $this->augmentInputs($inputs);
         $prompt = $this->promptTemplate->format($augmented);
 
-        $response = $this->agent->prompt(
-            prompt: $prompt,
-            provider: $this->provider,
-            model: $this->model,
-        );
+        $response = $this->invokeAgentPrompt($agent, $prompt);
         $raw = $this->extractResponseText($response);
 
         $this->memory?->add('human', $this->extractPrimaryInput($inputs));
@@ -104,14 +168,11 @@ final class Chain implements ChainContract
 
     public function stream(array $inputs): \Generator
     {
+        $agent = $this->resolveAgent();
         $augmented = $this->augmentInputs($inputs);
         $prompt = $this->promptTemplate->format($augmented);
 
-        foreach ($this->agent->stream(
-            prompt: $prompt,
-            provider: $this->provider,
-            model: $this->model,
-        ) as $event) {
+        foreach ($this->invokeAgentStream($agent, $prompt) as $event) {
             if (is_object($event) && method_exists($event, 'text')) {
                 yield (string) $event->text();
 
@@ -203,5 +264,55 @@ final class Chain implements ChainContract
         }
 
         return (string) $response;
+    }
+
+    private function resolveAgent(): Agent
+    {
+        if ($this->providerOptions === [] && $this->providerOptionsResolver === null) {
+            return $this->agent;
+        }
+
+        if ($this->agent instanceof HasStructuredOutput) {
+            return new StructuredProviderOptionsAgent(
+                $this->agent,
+                $this->providerOptions,
+                $this->providerOptionsResolver,
+            );
+        }
+
+        return new ProviderOptionsAgent(
+            $this->agent,
+            $this->providerOptions,
+            $this->providerOptionsResolver,
+        );
+    }
+
+    private function invokeAgentPrompt(Agent $agent, string $prompt): mixed
+    {
+        $args = [$prompt, $this->attachments, $this->provider, $this->model];
+
+        if ($this->agentMethodSupportsTimeout($agent, 'prompt')) {
+            $args[] = $this->timeout;
+        }
+
+        return $agent->prompt(...$args);
+    }
+
+    private function invokeAgentStream(Agent $agent, string $prompt): iterable
+    {
+        $args = [$prompt, $this->attachments, $this->provider, $this->model];
+
+        if ($this->agentMethodSupportsTimeout($agent, 'stream')) {
+            $args[] = $this->timeout;
+        }
+
+        return $agent->stream(...$args);
+    }
+
+    private function agentMethodSupportsTimeout(Agent $agent, string $method): bool
+    {
+        $reflection = new \ReflectionMethod($agent, $method);
+
+        return $reflection->getNumberOfParameters() >= 5;
     }
 }

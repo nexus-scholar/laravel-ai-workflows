@@ -285,6 +285,9 @@ foreach ($chain->stream(['input' => 'Hello']) as $token) {
 
 ## Provider Configuration
 
+> Boundary: chain classes are orchestration-only. They format prompt inputs and forward execution to Laravel AI agents.
+> Provider transport concerns (HTTP clients, retries, auth signing) belong in `laravel/ai` providers, not `src/Chains`.
+
 ### Per-Chain Override
 
 ```php
@@ -292,6 +295,34 @@ $chain = Chain::make($agent, $prompt)
     ->withProvider('anthropic')
     ->withModel('claude-3-sonnet');
 ```
+
+### Timeout and Attachments
+
+```php
+use Laravel\Ai\Files;
+
+$chain = Chain::make($agent, PromptTemplate::from('Analyze: {input}'))
+    ->withTimeout(120)
+    ->withAttachments([
+        Files\Document::fromStorage('transcript.pdf'),
+    ]);
+```
+
+### Provider Options
+
+```php
+$chain = Chain::make($agent, PromptTemplate::from('Q: {input}'))
+    ->withProvider('openai')
+    ->withProviderOptions([
+        '*' => ['temperature' => 0.2],
+        'openai' => ['reasoning' => ['effort' => 'low']],
+    ])
+    ->withProviderOptionsResolver(function (string|\Laravel\Ai\Enums\Lab $provider, array $options) {
+        return ['frequency_penalty' => 0.1];
+    });
+```
+
+Provider option precedence is: agent-defined options -> `*` wildcard -> provider-specific options -> resolver output.
 
 ### Using Config Defaults
 

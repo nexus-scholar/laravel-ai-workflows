@@ -6,6 +6,8 @@ use Laravel\Ai\Ai;
 use Laravel\Ai\AnonymousAgent;
 use Laravel\Ai\StructuredAnonymousAgent;
 use Nexus\Workflow\Chains\Chain;
+use Nexus\Workflow\Chains\Support\ProviderOptionsAgent;
+use Nexus\Workflow\Chains\Support\StructuredProviderOptionsAgent;
 use Nexus\Workflow\Contracts\Retriever;
 use Nexus\Workflow\Memory\InMemoryConversation;
 use Nexus\Workflow\Prompts\PromptTemplate;
@@ -98,6 +100,81 @@ it('passes custom model override to laravel ai', function () {
 
     Ai::assertAgentWasPrompted(AnonymousAgent::class, fn ($prompt) => $prompt->model === 'gpt-4o-mini'
     );
+});
+
+it('passes timeout override to laravel ai', function () {
+    Ai::fakeAgent(AnonymousAgent::class, ['Timeout OK']);
+
+    $chain = Chain::make(
+        agent(),
+        PromptTemplate::from('Timeout check: {input}')
+    )->withTimeout(120);
+
+    $chain->run(['input' => 'ping']);
+
+    Ai::assertAgentWasPrompted(AnonymousAgent::class, fn ($prompt) => $prompt->timeout === 120);
+});
+
+it('passes attachments to laravel ai', function () {
+    Ai::fakeAgent(AnonymousAgent::class, ['Attachment OK']);
+
+    $attachment = (object) ['name' => 'demo.txt'];
+
+    $chain = Chain::make(
+        agent(),
+        PromptTemplate::from('Attachment check: {input}')
+    )->withAttachments([$attachment]);
+
+    $chain->run(['input' => 'ping']);
+
+    Ai::assertAgentWasPrompted(AnonymousAgent::class, fn ($prompt) => $prompt->attachments->count() === 1);
+});
+
+it('passes failover provider arrays to laravel ai', function () {
+    Ai::fakeAgent(AnonymousAgent::class, ['Failover OK']);
+
+    $chain = Chain::make(
+        agent(),
+        PromptTemplate::from('Failover check: {input}')
+    )->withProvider(['openai', 'anthropic']);
+
+    $chain->run(['input' => 'ping']);
+
+    Ai::assertAgentWasPrompted(AnonymousAgent::class, fn ($prompt) => in_array($prompt->provider()->name(), ['openai', 'anthropic'], true));
+});
+
+it('runs chain with provider options array using provider-options wrapper', function () {
+    Ai::fakeAgent(ProviderOptionsAgent::class, ['Provider options OK']);
+
+    $chain = Chain::make(
+        agent(),
+        PromptTemplate::from('Options check: {input}')
+    )->withProviderOptions([
+        'openai' => ['temperature' => 0.2],
+    ])->withProvider('openai');
+
+    $result = $chain->run(['input' => 'ping']);
+
+    expect($result)->toBe('Provider options OK');
+    Ai::assertAgentWasPrompted(ProviderOptionsAgent::class, fn ($prompt) => str_contains($prompt->prompt, 'Options check: ping'));
+});
+
+it('runs structured chain with provider options resolver using structured wrapper', function () {
+    Ai::fakeAgent(StructuredProviderOptionsAgent::class, [[
+        'summary' => 'ok',
+    ]]);
+
+    $chain = Chain::make(
+        agent(schema: fn ($schema) => ['summary' => $schema->string()->required()]),
+        PromptTemplate::from('Structured options check: {input}')
+    )->withProviderOptionsResolver(fn () => ['reasoning' => ['effort' => 'low']]);
+
+    $result = $chain->run(['input' => 'ping']);
+
+    expect($result)
+        ->toBeArray()
+        ->toHaveKey('summary');
+    Ai::assertAgentWasPrompted(StructuredProviderOptionsAgent::class, fn ($prompt) => str_contains($prompt->prompt, 'Structured options check: ping'));
 });
 
 it('throws when retriever is configured without an explicit input key', function () {

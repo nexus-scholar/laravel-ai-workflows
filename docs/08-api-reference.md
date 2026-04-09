@@ -170,6 +170,8 @@ $chain = Chain::make($agent, $prompt)
 
 ### Provider Override
 
+`Chain` provider APIs are pass-through orchestration hooks. They must not introduce direct provider HTTP transport logic in this package.
+
 ```php
 withProvider(string|array|null $provider): self
 ```
@@ -191,6 +193,52 @@ Override the model for this chain.
 - `$model` — Model name (e.g., 'gpt-4', 'claude-3-sonnet')
 
 **Returns:** New chain instance (cloned)
+
+```php
+withTimeout(?int $timeout): self
+```
+
+Override agent timeout (seconds) for this chain.
+
+**Parameters:**
+- `$timeout` — Request timeout in seconds, or `null` for SDK default
+
+**Returns:** New chain instance (cloned)
+
+```php
+withAttachments(array $attachments): self
+```
+
+Attach files/images supported by `laravel/ai` to every prompt in this chain.
+
+**Parameters:**
+- `$attachments` — Attachment list passed directly to the SDK agent call
+
+**Returns:** New chain instance (cloned)
+
+```php
+withProviderOptions(array $providerOptions): self
+```
+
+Define provider-specific option maps.
+
+**Parameters:**
+- `$providerOptions` — Option map keyed by provider name plus optional `*` wildcard
+
+**Returns:** New chain instance (cloned)
+
+```php
+withProviderOptionsResolver(callable $resolver): self
+```
+
+Define a runtime resolver that can compute or override provider options.
+
+**Resolver signature:**
+- `function (Lab|string $provider, array $resolvedOptions, Agent $innerAgent): array`
+
+**Returns:** New chain instance (cloned)
+
+Provider options precedence is: agent-defined options -> wildcard map (`*`) -> provider-specific map -> resolver output.
 
 ---
 
