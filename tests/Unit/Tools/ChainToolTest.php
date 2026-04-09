@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Nexus\AiChain\Tests\Unit\Tools;
+namespace Nexus\Workflow\Tests\Unit\Tools;
 
 use Illuminate\JsonSchema\JsonSchemaTypeFactory;
 use Laravel\Ai\Tools\Request;
 use Mockery;
-use Nexus\AiChain\Contracts\Chain;
-use Nexus\AiChain\Tests\TestCase;
-use Nexus\AiChain\Tools\ChainTool;
+use Nexus\Workflow\Contracts\Chain;
+use Nexus\Workflow\Tests\TestCase;
+use Nexus\Workflow\Tools\ChainTool;
 
 class ChainToolTest extends TestCase
 {

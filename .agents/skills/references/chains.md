@@ -7,8 +7,8 @@ Guide for building and composing AI chains.
 A chain connects an agent to a prompt template:
 
 ```php
-use Nexus\AiChain\Chains\Chain;
-use Nexus\AiChain\Prompts\PromptTemplate;
+use Nexus\\Workflow\Chains\Chain;
+use Nexus\\Workflow\Prompts\PromptTemplate;
 use function Laravel\Ai\agent;
 
 $chain = Chain::make(
@@ -86,7 +86,7 @@ Output: {final: '...'}
 Use `ChainFactory` for concise composition:
 
 ```php
-use Nexus\AiChain\Chains\ChainFactory;
+use Nexus\\Workflow\Chains\ChainFactory;
 
 $pipeline = ChainFactory::chain($agent1, $p1, 'step1')
     ->thenPrompt($agent2, $p2, 'step2')

@@ -1,8 +1,8 @@
 <?php
 
-namespace Nexus\AiChain\Memory;
+namespace Nexus\Workflow\Memory;
 
-use Nexus\AiChain\Contracts\Memory;
+use Nexus\Workflow\Contracts\Memory;
 
 final class InMemoryConversation implements Memory
 {

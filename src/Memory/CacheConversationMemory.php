@@ -1,10 +1,10 @@
 <?php
 
-namespace Nexus\AiChain\Memory;
+namespace Nexus\Workflow\Memory;
 
 use Illuminate\Support\Facades\Cache;
 use InvalidArgumentException;
-use Nexus\AiChain\Contracts\Memory;
+use Nexus\Workflow\Contracts\Memory;
 
 final class CacheConversationMemory implements Memory
 {

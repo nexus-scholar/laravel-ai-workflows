@@ -1,11 +1,11 @@
 <?php
 
-namespace Nexus\AiChain\Graph;
+namespace Nexus\Workflow\Graph;
 
 use Generator;
 use InvalidArgumentException;
-use Nexus\AiChain\Contracts\Checkpointable;
-use Nexus\AiChain\Contracts\Node;
+use Nexus\Workflow\Contracts\Checkpointable;
+use Nexus\Workflow\Contracts\Node;
 use RuntimeException;
 
 final class CompiledGraph

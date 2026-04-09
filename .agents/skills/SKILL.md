@@ -1,16 +1,16 @@
 ---
-name: laravel-ai-chain
+name: laravel-ai-workflows
 description: Build AI workflows with chains, state graphs, memory, and RAG. Create multi-step AI pipelines, deterministic workflows, and retrieval-augmented generation systems. Use when building conversational AI, content pipelines, data analysis workflows, or complex agent orchestrations.
 license: MIT
-compatibility: Requires PHP 8.3+, Laravel 13.0+, laravel/ai 0.4.4+
+compatibility: Requires PHP 8.3+, Laravel 12.0+ or 13.0+, laravel/ai 0.4.4+
 metadata:
   author: nexus-team
   version: "1.0"
-  package: nexus/laravel-ai-chain
-  github: https://github.com/mouadh/nexus
+  package: nexus/laravel-ai-workflows
+  github: https://github.com/nexus-scholar/laravel-ai-workflows
 ---
 
-# Laravel AI Chain
+# Laravel AI Workflows
 
 Orchestration framework for building AI workflows with `laravel/ai`. Compose chains, build state graphs, manage conversation memory, and implement retrieval-augmented generation (RAG) with type-safe immutable state.
 
@@ -19,8 +19,8 @@ Orchestration framework for building AI workflows with `laravel/ai`. Compose cha
 ### 1. Simple Chain (Q&A)
 
 ```php
-use Nexus\AiChain\Chains\Chain;
-use Nexus\AiChain\Prompts\PromptTemplate;
+use Nexus\\Workflow\Chains\Chain;
+use Nexus\\Workflow\Prompts\PromptTemplate;
 use function Laravel\Ai\agent;
 
 $chain = Chain::make(
@@ -35,7 +35,7 @@ $result = $chain->run(['input' => 'What is RAG?']);
 ### 2. Multi-Stage Pipeline
 
 ```php
-use Nexus\AiChain\Chains\ChainFactory;
+use Nexus\\Workflow\Chains\ChainFactory;
 
 $pipeline = ChainFactory::chain($agent1, $p1, 'draft')
     ->thenPrompt($agent2, $p2, 'edited')
@@ -48,8 +48,8 @@ $result = $pipeline->run(['topic' => 'AI']);
 ### 3. State Graph Workflow
 
 ```php
-use Nexus\AiChain\Graph\State;
-use Nexus\AiChain\Graph\StateGraph;
+use Nexus\\Workflow\Graph\State;
+use Nexus\\Workflow\Graph\StateGraph;
 
 final class ProcessingState extends State
 {
@@ -88,7 +88,7 @@ $result = $graph->compile()->invoke(new ProcessingState(data: 'sample'));
 ### 4. Add Memory for Conversations
 
 ```php
-use Nexus\AiChain\Memory\CacheConversationMemory;
+use Nexus\\Workflow\Memory\CacheConversationMemory;
 
 $memory = new CacheConversationMemory(key: "chat.$userId", ttl: 86400);
 
@@ -101,7 +101,7 @@ $chain->run(['input' => 'How do I use it?']);  // Remembers!
 ### 5. Implement RAG
 
 ```php
-use Nexus\AiChain\Retrieval\VectorStoreRetriever;
+use Nexus\\Workflow\Retrieval\VectorStoreRetriever;
 
 $chain = Chain::make(
     agent(),
@@ -131,7 +131,7 @@ Type-safe, immutable workflow data. Create custom state by extending the State c
 ## Installation
 
 ```bash
-composer require nexus/laravel-ai-chain
+composer require nexus/laravel-ai-workflows
 
 # Optional: publish config
 php artisan vendor:publish --tag=ai-chain-config
@@ -193,7 +193,7 @@ See [references/README.md](references/README.md) for complete index and learning
 
 ## When to Use
 
-Use laravel-ai-chain when you need:
+Use laravel-ai-workflows when you need:
 
 - **Multi-step AI workflows** — Chains for sequential processing
 - **Complex branching** — State graphs for conditional routing

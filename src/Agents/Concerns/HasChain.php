@@ -1,10 +1,10 @@
 <?php
 
-namespace Nexus\AiChain\Agents\Concerns;
+namespace Nexus\Workflow\Agents\Concerns;
 
-use Nexus\AiChain\Contracts\Chain;
-use Nexus\AiChain\Contracts\Memory;
-use Nexus\AiChain\Contracts\Retriever;
+use Nexus\Workflow\Contracts\Chain;
+use Nexus\Workflow\Contracts\Memory;
+use Nexus\Workflow\Contracts\Retriever;
 
 trait HasChain
 {

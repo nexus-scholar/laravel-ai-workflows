@@ -1,4 +1,4 @@
-# Maintainer Playbook (`laravel-ai-chain`)
+# Maintainer Playbook (`laravel-ai-workflows`)
 
 This runbook gives copy-ready PowerShell commands for release and hotfix operations.
 Use it with:

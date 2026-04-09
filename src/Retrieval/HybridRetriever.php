@@ -1,9 +1,9 @@
 <?php
 
-namespace Nexus\AiChain\Retrieval;
+namespace Nexus\Workflow\Retrieval;
 
 use InvalidArgumentException;
-use Nexus\AiChain\Contracts\Retriever;
+use Nexus\Workflow\Contracts\Retriever;
 
 /**
  * Fuses two retrievers (typically vector + keyword) using Reciprocal Rank Fusion.

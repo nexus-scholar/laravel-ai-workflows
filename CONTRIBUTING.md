@@ -1,6 +1,6 @@
 # Contributing
 
-Thanks for contributing to `nexus/laravel-ai-chain`.
+Thanks for contributing to `nexus/laravel-ai-workflows`.
 
 ## Development Setup
 

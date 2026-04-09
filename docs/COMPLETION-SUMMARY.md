@@ -1,6 +1,6 @@
 # ✅ Documentation Complete
 
-Comprehensive documentation for **laravel-ai-chain** has been successfully created!
+Comprehensive documentation for **laravel-ai-workflows** has been successfully created!
 
 ## 📦 What Was Created
 
@@ -111,7 +111,7 @@ After going through the documentation, you'll be able to:
 ## 📁 Directory Structure
 
 ```
-laravel-ai-chain/docs/
+laravel-ai-workflows/docs/
 ├── INDEX.md                           ← Start here for quick links!
 ├── README.md                          ← Start here for overview
 ├── DOCUMENTATION-SUMMARY.md
@@ -204,10 +204,10 @@ After learning from this documentation:
 
 ```bash
 # 1. Read the overview (5 minutes)
-open laravel-ai-chain/docs/README.md
+open laravel-ai-workflows/docs/README.md
 
 # 2. Run your first example (15 minutes)
-open laravel-ai-chain/docs/tutorials/01-beginner-first-chain.md
+open laravel-ai-workflows/docs/tutorials/01-beginner-first-chain.md
 
 # 3. Build your first project (20 minutes)
 # Follow the code examples!

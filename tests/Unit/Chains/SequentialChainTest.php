@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Nexus\AiChain\Chains\SequentialChain;
-use Nexus\AiChain\Contracts\Chain as ChainContract;
+use Nexus\Workflow\Chains\SequentialChain;
+use Nexus\Workflow\Contracts\Chain as ChainContract;
 
 it('runs chains sequentially and returns last output', function () {
     $first = Mockery::mock(ChainContract::class);

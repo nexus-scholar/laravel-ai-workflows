@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Nexus\AiChain\Memory\InMemoryConversation;
+use Nexus\Workflow\Memory\InMemoryConversation;
 
 it('adds and retrieves messages', function () {
     $memory = new InMemoryConversation;

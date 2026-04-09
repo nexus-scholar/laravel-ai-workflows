@@ -1,115 +1,115 @@
 parameters:
 	ignoreErrors:
 		-
-			rawMessage: Trait Nexus\AiChain\Agents\Concerns\HasChain is used zero times and is not analysed.
+			rawMessage: Trait Nexus\Workflow\Agents\Concerns\HasChain is used zero times and is not analysed.
 			identifier: trait.unused
 			count: 1
 			path: src/Agents/Concerns/HasChain.php
 
 		-
-			rawMessage: 'Method Nexus\AiChain\Chains\Chain::augmentInputs() has parameter $inputs with no value type specified in iterable type array.'
+			rawMessage: 'Method Nexus\Workflow\Chains\Chain::augmentInputs() has parameter $inputs with no value type specified in iterable type array.'
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Chains/Chain.php
 
 		-
-			rawMessage: 'Method Nexus\AiChain\Chains\Chain::augmentInputs() return type has no value type specified in iterable type array.'
+			rawMessage: 'Method Nexus\Workflow\Chains\Chain::augmentInputs() return type has no value type specified in iterable type array.'
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Chains/Chain.php
 
 		-
-			rawMessage: 'Method Nexus\AiChain\Chains\Chain::extractPrimaryInput() has parameter $inputs with no value type specified in iterable type array.'
+			rawMessage: 'Method Nexus\Workflow\Chains\Chain::extractPrimaryInput() has parameter $inputs with no value type specified in iterable type array.'
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Chains/Chain.php
 
 		-
-			rawMessage: 'Method Nexus\AiChain\Chains\Chain::run() has parameter $inputs with no value type specified in iterable type array.'
+			rawMessage: 'Method Nexus\Workflow\Chains\Chain::run() has parameter $inputs with no value type specified in iterable type array.'
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Chains/Chain.php
 
 		-
-			rawMessage: 'Method Nexus\AiChain\Chains\Chain::stream() has parameter $inputs with no value type specified in iterable type array.'
+			rawMessage: 'Method Nexus\Workflow\Chains\Chain::stream() has parameter $inputs with no value type specified in iterable type array.'
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Chains/Chain.php
 
 		-
-			rawMessage: 'Method Nexus\AiChain\Chains\Chain::withProvider() has parameter $provider with no value type specified in iterable type array.'
+			rawMessage: 'Method Nexus\Workflow\Chains\Chain::withProvider() has parameter $provider with no value type specified in iterable type array.'
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Chains/Chain.php
 
 		-
-			rawMessage: Property Nexus\AiChain\Chains\Chain::$provider type has no value type specified in iterable type array.
+			rawMessage: Property Nexus\Workflow\Chains\Chain::$provider type has no value type specified in iterable type array.
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Chains/Chain.php
 
 		-
-			rawMessage: 'Method Nexus\AiChain\Chains\SequentialChain::run() has parameter $inputs with no value type specified in iterable type array.'
+			rawMessage: 'Method Nexus\Workflow\Chains\SequentialChain::run() has parameter $inputs with no value type specified in iterable type array.'
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Chains/SequentialChain.php
 
 		-
-			rawMessage: 'Method Nexus\AiChain\Chains\SequentialChain::stream() has parameter $inputs with no value type specified in iterable type array.'
+			rawMessage: 'Method Nexus\Workflow\Chains\SequentialChain::stream() has parameter $inputs with no value type specified in iterable type array.'
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Chains/SequentialChain.php
 
 		-
-			rawMessage: 'Method Nexus\AiChain\Contracts\Chain::run() has parameter $inputs with no value type specified in iterable type array.'
+			rawMessage: 'Method Nexus\Workflow\Contracts\Chain::run() has parameter $inputs with no value type specified in iterable type array.'
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Contracts/Chain.php
 
 		-
-			rawMessage: 'Method Nexus\AiChain\Contracts\Chain::stream() has parameter $inputs with no value type specified in iterable type array.'
+			rawMessage: 'Method Nexus\Workflow\Contracts\Chain::stream() has parameter $inputs with no value type specified in iterable type array.'
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Contracts/Chain.php
 
 		-
-			rawMessage: 'Method Nexus\AiChain\Contracts\Checkpointable::latest() return type has no value type specified in iterable type array.'
+			rawMessage: 'Method Nexus\Workflow\Contracts\Checkpointable::latest() return type has no value type specified in iterable type array.'
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Contracts/Checkpointable.php
 
 		-
-			rawMessage: 'Method Nexus\AiChain\Contracts\Checkpointable::load() return type has no value type specified in iterable type array.'
+			rawMessage: 'Method Nexus\Workflow\Contracts\Checkpointable::load() return type has no value type specified in iterable type array.'
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Contracts/Checkpointable.php
 
 		-
-			rawMessage: 'Method Nexus\AiChain\Graph\Checkpoint\CacheCheckpoint::latest() return type has no value type specified in iterable type array.'
+			rawMessage: 'Method Nexus\Workflow\Graph\Checkpoint\CacheCheckpoint::latest() return type has no value type specified in iterable type array.'
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Graph/Checkpoint/CacheCheckpoint.php
 
 		-
-			rawMessage: 'Method Nexus\AiChain\Graph\Checkpoint\CacheCheckpoint::load() return type has no value type specified in iterable type array.'
+			rawMessage: 'Method Nexus\Workflow\Graph\Checkpoint\CacheCheckpoint::load() return type has no value type specified in iterable type array.'
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Graph/Checkpoint/CacheCheckpoint.php
 
 		-
-			rawMessage: 'Method Nexus\AiChain\Graph\CompiledGraph::__construct() has parameter $edges with no value type specified in iterable type array.'
+			rawMessage: 'Method Nexus\Workflow\Graph\CompiledGraph::__construct() has parameter $edges with no value type specified in iterable type array.'
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Graph/CompiledGraph.php
 
 		-
-			rawMessage: 'Method Nexus\AiChain\Graph\CompiledGraph::__construct() has parameter $nodes with no value type specified in iterable type array.'
+			rawMessage: 'Method Nexus\Workflow\Graph\CompiledGraph::__construct() has parameter $nodes with no value type specified in iterable type array.'
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Graph/CompiledGraph.php
 
 		-
-			rawMessage: 'Method Nexus\AiChain\Graph\CompiledGraph::stream() return type with generic class Generator does not specify its types: TKey, TValue, TSend, TReturn'
+			rawMessage: 'Method Nexus\Workflow\Graph\CompiledGraph::stream() return type with generic class Generator does not specify its types: TKey, TValue, TSend, TReturn'
 			identifier: missingType.generics
 			count: 1
 			path: src/Graph/CompiledGraph.php
@@ -121,115 +121,115 @@ parameters:
 			path: src/Graph/CompiledGraph.php
 
 		-
-			rawMessage: 'Method Nexus\AiChain\Graph\State::fromArray() has parameter $data with no value type specified in iterable type array.'
+			rawMessage: 'Method Nexus\Workflow\Graph\State::fromArray() has parameter $data with no value type specified in iterable type array.'
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Graph/State.php
 
 		-
-			rawMessage: 'Method Nexus\AiChain\Graph\State::toArray() return type has no value type specified in iterable type array.'
+			rawMessage: 'Method Nexus\Workflow\Graph\State::toArray() return type has no value type specified in iterable type array.'
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Graph/State.php
 
 		-
-			rawMessage: 'Method Nexus\AiChain\Graph\State::with() has parameter $updates with no value type specified in iterable type array.'
+			rawMessage: 'Method Nexus\Workflow\Graph\State::with() has parameter $updates with no value type specified in iterable type array.'
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Graph/State.php
 
 		-
-			rawMessage: Property Nexus\AiChain\Graph\StateGraph::$edges type has no value type specified in iterable type array.
+			rawMessage: Property Nexus\Workflow\Graph\StateGraph::$edges type has no value type specified in iterable type array.
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Graph/StateGraph.php
 
 		-
-			rawMessage: Property Nexus\AiChain\Graph\StateGraph::$nodes type has no value type specified in iterable type array.
+			rawMessage: Property Nexus\Workflow\Graph\StateGraph::$nodes type has no value type specified in iterable type array.
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Graph/StateGraph.php
 
 		-
-			rawMessage: 'Method Nexus\AiChain\Memory\CacheConversationMemory::normalizeMessages() return type has no value type specified in iterable type array.'
+			rawMessage: 'Method Nexus\Workflow\Memory\CacheConversationMemory::normalizeMessages() return type has no value type specified in iterable type array.'
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Memory/CacheConversationMemory.php
 
 		-
-			rawMessage: Property Nexus\AiChain\Memory\CacheConversationMemory::$messages type has no value type specified in iterable type array.
+			rawMessage: Property Nexus\Workflow\Memory\CacheConversationMemory::$messages type has no value type specified in iterable type array.
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Memory/CacheConversationMemory.php
 
 		-
-			rawMessage: Property Nexus\AiChain\Memory\InMemoryConversation::$messages type has no value type specified in iterable type array.
+			rawMessage: Property Nexus\Workflow\Memory\InMemoryConversation::$messages type has no value type specified in iterable type array.
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Memory/InMemoryConversation.php
 
 		-
-			rawMessage: 'Method Nexus\AiChain\Memory\SummaryMemory::messagesAsString() has parameter $messages with no value type specified in iterable type array.'
+			rawMessage: 'Method Nexus\Workflow\Memory\SummaryMemory::messagesAsString() has parameter $messages with no value type specified in iterable type array.'
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Memory/SummaryMemory.php
 
 		-
-			rawMessage: Property Nexus\AiChain\Memory\SummaryMemory::$messages type has no value type specified in iterable type array.
+			rawMessage: Property Nexus\Workflow\Memory\SummaryMemory::$messages type has no value type specified in iterable type array.
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Memory/SummaryMemory.php
 
 		-
-			rawMessage: 'Method Nexus\AiChain\Prompts\ChatPromptTemplate::format() has parameter $values with no value type specified in iterable type array.'
+			rawMessage: 'Method Nexus\Workflow\Prompts\ChatPromptTemplate::format() has parameter $values with no value type specified in iterable type array.'
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Prompts/ChatPromptTemplate.php
 
 		-
-			rawMessage: 'Method Nexus\AiChain\Prompts\ChatPromptTemplate::fromMessages() has parameter $messages with no value type specified in iterable type array.'
+			rawMessage: 'Method Nexus\Workflow\Prompts\ChatPromptTemplate::fromMessages() has parameter $messages with no value type specified in iterable type array.'
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Prompts/ChatPromptTemplate.php
 
 		-
-			rawMessage: 'Method Nexus\AiChain\Prompts\FewShotPrompt::__construct() has parameter $examples with no value type specified in iterable type array.'
+			rawMessage: 'Method Nexus\Workflow\Prompts\FewShotPrompt::__construct() has parameter $examples with no value type specified in iterable type array.'
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Prompts/FewShotPrompt.php
 
 		-
-			rawMessage: 'Method Nexus\AiChain\Prompts\FewShotPrompt::format() has parameter $values with no value type specified in iterable type array.'
+			rawMessage: 'Method Nexus\Workflow\Prompts\FewShotPrompt::format() has parameter $values with no value type specified in iterable type array.'
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Prompts/FewShotPrompt.php
 
 		-
-			rawMessage: 'Method Nexus\AiChain\Prompts\PromptTemplate::__construct() has parameter $inputVariables with no value type specified in iterable type array.'
+			rawMessage: 'Method Nexus\Workflow\Prompts\PromptTemplate::__construct() has parameter $inputVariables with no value type specified in iterable type array.'
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Prompts/PromptTemplate.php
 
 		-
-			rawMessage: 'Method Nexus\AiChain\Prompts\PromptTemplate::format() has parameter $values with no value type specified in iterable type array.'
+			rawMessage: 'Method Nexus\Workflow\Prompts\PromptTemplate::format() has parameter $values with no value type specified in iterable type array.'
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Prompts/PromptTemplate.php
 
 		-
-			rawMessage: 'Method Nexus\AiChain\Prompts\PromptTemplate::inputVariables() return type has no value type specified in iterable type array.'
+			rawMessage: 'Method Nexus\Workflow\Prompts\PromptTemplate::inputVariables() return type has no value type specified in iterable type array.'
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Prompts/PromptTemplate.php
 
 		-
-			rawMessage: 'Method Nexus\AiChain\Retrieval\Document::__construct() has parameter $metadata with no value type specified in iterable type array.'
+			rawMessage: 'Method Nexus\Workflow\Retrieval\Document::__construct() has parameter $metadata with no value type specified in iterable type array.'
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Retrieval/Document.php
 
 		-
-			rawMessage: Property Nexus\AiChain\Retrieval\HybridRetriever::$docMap type has no value type specified in iterable type array.
+			rawMessage: Property Nexus\Workflow\Retrieval\HybridRetriever::$docMap type has no value type specified in iterable type array.
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Retrieval/HybridRetriever.php
@@ -253,13 +253,13 @@ parameters:
 			path: src/Retrieval/VectorStoreRetriever.php
 
 		-
-			rawMessage: 'Method Nexus\AiChain\Retrieval\VectorStoreRetriever::__construct() has parameter $searcher with no value type specified in iterable type array.'
+			rawMessage: 'Method Nexus\Workflow\Retrieval\VectorStoreRetriever::__construct() has parameter $searcher with no value type specified in iterable type array.'
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Retrieval/VectorStoreRetriever.php
 
 		-
-			rawMessage: 'Method Nexus\AiChain\Tools\ChainTool::handle() should return string but returns string|false.'
+			rawMessage: 'Method Nexus\Workflow\Tools\ChainTool::handle() should return string but returns string|false.'
 			identifier: return.type
 			count: 1
 			path: src/Tools/ChainTool.php

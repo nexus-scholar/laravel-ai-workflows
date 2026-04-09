@@ -1,8 +1,8 @@
 <?php
 
-namespace Nexus\AiChain\Contracts;
+namespace Nexus\Workflow\Contracts;
 
-use Nexus\AiChain\Graph\State;
+use Nexus\Workflow\Graph\State;
 
 interface Checkpointable
 {

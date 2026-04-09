@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Nexus\AiChain\Examples\Support;
+namespace Nexus\Workflow\Examples\Support;
 
 use Illuminate\Broadcasting\Channel;
 use Laravel\Ai\Contracts\Agent;

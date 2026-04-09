@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-use Nexus\AiChain\Examples\Support\DemoAgent;
-use Nexus\AiChain\Chains\Chain;
-use Nexus\AiChain\Prompts\PromptTemplate;
-use Nexus\AiChain\Retrieval\VectorStoreRetriever;
+use Nexus\Workflow\Examples\Support\DemoAgent;
+use Nexus\Workflow\Chains\Chain;
+use Nexus\Workflow\Prompts\PromptTemplate;
+use Nexus\Workflow\Retrieval\VectorStoreRetriever;
 
 require __DIR__.'/../vendor/autoload.php';
 require __DIR__.'/Support/DemoAgent.php';

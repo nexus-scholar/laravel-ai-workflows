@@ -5,9 +5,9 @@ declare(strict_types=1);
 use Laravel\Ai\Ai;
 use Laravel\Ai\AnonymousAgent;
 use Laravel\Ai\StructuredAnonymousAgent;
-use Nexus\AiChain\Chains\Chain;
-use Nexus\AiChain\Memory\InMemoryConversation;
-use Nexus\AiChain\Prompts\PromptTemplate;
+use Nexus\Workflow\Chains\Chain;
+use Nexus\Workflow\Memory\InMemoryConversation;
+use Nexus\Workflow\Prompts\PromptTemplate;
 
 use function Laravel\Ai\agent;
 

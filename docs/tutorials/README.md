@@ -1,6 +1,6 @@
 # Tutorials Directory
 
-This folder contains structured learning paths for laravel-ai-chain, from beginner to advanced.
+This folder contains structured learning paths for laravel-ai-workflows, from beginner to advanced.
 
 ## 📚 Available Tutorials
 
@@ -112,7 +112,7 @@ Deploy to production:
 Each tutorial has runnable code samples. To run a tutorial example:
 
 ```bash
-cd laravel-ai-chain
+cd laravel-ai-workflows
 php artisan tinker
 
 # Then copy-paste code from the tutorial

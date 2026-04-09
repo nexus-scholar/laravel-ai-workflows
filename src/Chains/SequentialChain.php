@@ -1,9 +1,9 @@
 <?php
 
-namespace Nexus\AiChain\Chains;
+namespace Nexus\Workflow\Chains;
 
 use InvalidArgumentException;
-use Nexus\AiChain\Contracts\Chain as ChainContract;
+use Nexus\Workflow\Contracts\Chain as ChainContract;
 
 /**
  * Pipes multiple chains together.

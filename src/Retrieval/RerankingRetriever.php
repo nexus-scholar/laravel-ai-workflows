@@ -1,10 +1,10 @@
 <?php
 
-namespace Nexus\AiChain\Retrieval;
+namespace Nexus\Workflow\Retrieval;
 
 use InvalidArgumentException;
 use Laravel\Ai\Reranking;
-use Nexus\AiChain\Contracts\Retriever;
+use Nexus\Workflow\Contracts\Retriever;
 
 final class RerankingRetriever implements Retriever
 {

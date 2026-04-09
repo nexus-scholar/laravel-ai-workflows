@@ -2,7 +2,7 @@
 
 ## Supported Versions
 
-Security fixes are applied to the latest published version of `nexus/laravel-ai-chain`.
+Security fixes are applied to the latest published version of `nexus/laravel-ai-workflows`.
 
 ## Reporting a Vulnerability
 

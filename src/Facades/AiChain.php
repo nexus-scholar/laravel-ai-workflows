@@ -1,12 +1,12 @@
 <?php
 
-namespace Nexus\AiChain\Facades;
+namespace Nexus\Workflow\Facades;
 
 use Illuminate\Support\Facades\Facade;
 use Laravel\Ai\Contracts\Agent;
-use Nexus\AiChain\AiChainManager;
-use Nexus\AiChain\Chains\ChainFactory;
-use Nexus\AiChain\Prompts\PromptTemplate;
+use Nexus\Workflow\AiChainManager;
+use Nexus\Workflow\Chains\ChainFactory;
+use Nexus\Workflow\Prompts\PromptTemplate;
 
 /**
  * @method static ChainFactory chain(Agent $agent, PromptTemplate $promptTemplate, string $outputKey = 'output')

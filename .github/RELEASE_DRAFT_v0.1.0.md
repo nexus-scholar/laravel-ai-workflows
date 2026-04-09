@@ -1,6 +1,6 @@
 # v0.1.0
 
-`nexus/laravel-ai-chain` first public release.
+`nexus/laravel-ai-workflows` first public release.
 
 ## Highlights
 - Laravel-native AI composition layer built on top of `laravel/ai`.
@@ -11,7 +11,7 @@
 
 ## Added
 - Chain composition primitives: `Chain`, `SequentialChain`, and `ChainFactory`.
-- Laravel entrypoints: `AiChainManager` and `Nexus\AiChain\Facades\AiChain`.
+- Laravel entrypoints: `AiChainManager` and `Nexus\\Workflow\Facades\AiChain`.
 - Graph core: `StateGraph`, `CompiledGraph`, immutable `State`, and `Node` contract.
 - Queue execution path: `QueueRunner` + `RunGraphNode` with resolver-based graph reconstruction.
 - Checkpointing: `CacheCheckpoint` + `Checkpointable` contract.
@@ -52,5 +52,5 @@ php examples/fluent-chain-factory.php
 - Changelog: `CHANGELOG.md`
 - Upgrade Guide: `UPGRADE.md`
 - Release Checklist: `RELEASE_CHECKLIST.md`
-- Tutorial Path: `docs/laravel-ai-chain/tutorials/beginner-to-advanced.md`
+- Tutorial Path: `docs/laravel-ai-workflows/tutorials/beginner-to-advanced.md`
 

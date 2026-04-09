@@ -1,13 +1,13 @@
 # Prompt Templates & Engineering
 
-Guide for working with prompts in laravel-ai-chain.
+Guide for working with prompts in laravel-ai-workflows.
 
 ## PromptTemplate Basics
 
 Create templates with variable interpolation:
 
 ```php
-use Nexus\AiChain\Prompts\PromptTemplate;
+use Nexus\\Workflow\Prompts\PromptTemplate;
 
 $template = PromptTemplate::from(
     'You are a {role}.\n\nUser: {input}\n\nAssistant:'
@@ -73,7 +73,7 @@ $template->format(['question' => 'What is PHP?', 'extra' => 'ignored']);
 Prompts are the core of chains:
 
 ```php
-use Nexus\AiChain\Chains\Chain;
+use Nexus\\Workflow\Chains\Chain;
 use function Laravel\Ai\agent;
 
 $prompt = PromptTemplate::from(

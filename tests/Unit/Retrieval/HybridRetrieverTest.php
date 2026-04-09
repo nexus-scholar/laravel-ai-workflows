@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-use Nexus\AiChain\Contracts\Retriever;
-use Nexus\AiChain\Retrieval\Document;
-use Nexus\AiChain\Retrieval\HybridRetriever;
+use Nexus\Workflow\Contracts\Retriever;
+use Nexus\Workflow\Retrieval\Document;
+use Nexus\Workflow\Retrieval\HybridRetriever;
 
 it('fuses results using RRF', function () {
     $vector = Mockery::mock(Retriever::class);

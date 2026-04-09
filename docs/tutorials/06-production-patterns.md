@@ -57,7 +57,7 @@ Register in service provider:
 // app/Providers/AppServiceProvider.php
 
 use App\Workflows\WorkflowRegistry;
-use Nexus\AiChain\Graph\StateGraph;
+use Nexus\\Workflow\Graph\StateGraph;
 
 public function register()
 {
@@ -132,8 +132,8 @@ Save state after each node for resumability:
 ```php
 // app/Support/CheckpointedGraph.php
 
-use Nexus\AiChain\Graph\CompiledGraph;
-use Nexus\AiChain\Graph\State;
+use Nexus\\Workflow\Graph\CompiledGraph;
+use Nexus\\Workflow\Graph\State;
 use Illuminate\Support\Facades\Cache;
 
 class CheckpointedGraph
@@ -611,5 +611,5 @@ You've completed all tutorials! 🎉
 
 ---
 
-**Congratulations!** You're ready to build sophisticated AI systems with laravel-ai-chain! 🚀
+**Congratulations!** You're ready to build sophisticated AI systems with laravel-ai-workflows! 🚀
 

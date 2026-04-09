@@ -23,8 +23,8 @@ Create `app/Examples/PipelineDemo.php`:
 
 namespace App\Examples;
 
-use Nexus\AiChain\Chains\Chain;
-use Nexus\AiChain\Prompts\PromptTemplate;
+use Nexus\\Workflow\Chains\Chain;
+use Nexus\\Workflow\Prompts\PromptTemplate;
 use function Laravel\Ai\agent;
 
 class PipelineDemo
@@ -152,7 +152,7 @@ echo $post;
 Use `ChainFactory` for a more concise syntax:
 
 ```php
-use Nexus\AiChain\Chains\ChainFactory;
+use Nexus\\Workflow\Chains\ChainFactory;
 
 class BlogFactory
 {

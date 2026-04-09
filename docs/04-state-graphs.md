@@ -20,7 +20,7 @@ State Graphs enable complex, branching workflows with conditional routing. Use t
 Immutable data structure passed through the graph:
 
 ```php
-use Nexus\AiChain\Graph\State;
+use Nexus\\Workflow\Graph\State;
 
 final class DocumentState extends State
 {
@@ -128,7 +128,7 @@ final class WorkflowState extends State
 ### Step 2: Create Graph
 
 ```php
-use Nexus\AiChain\Graph\StateGraph;
+use Nexus\\Workflow\Graph\StateGraph;
 
 $graph = new StateGraph();
 ```

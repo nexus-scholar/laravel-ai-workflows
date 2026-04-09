@@ -1,4 +1,4 @@
-# Release Checklist (`laravel-ai-chain`)
+# Release Checklist (`laravel-ai-workflows`)
 
 ## Pre-release
 - [ ] Review `MAINTAINER_PLAYBOOK.md` and use the command flow for this release.

@@ -1,6 +1,6 @@
 <?php
 
-namespace Nexus\AiChain\Retrieval;
+namespace Nexus\Workflow\Retrieval;
 
 final readonly class Document
 {

@@ -1,6 +1,6 @@
 # Laravel AI Chain Documentation
 
-Welcome to the **laravel-ai-chain** documentation! This package provides a production-hardened composition layer on top of `laravel/ai`, enabling you to build complex AI workflows with chains, state machines, memory, and retrieval-augmented generation (RAG).
+Welcome to the **laravel-ai-workflows** documentation! This package provides a production-hardened composition layer on top of `laravel/ai`, enabling you to build complex AI workflows with chains, state machines, memory, and retrieval-augmented generation (RAG).
 
 ## 📚 What's Inside
 
@@ -19,8 +19,8 @@ This documentation covers:
 ## 🚀 Quick Start
 
 ```php
-use Nexus\AiChain\Chains\Chain;
-use Nexus\AiChain\Prompts\PromptTemplate;
+use Nexus\\Workflow\Chains\Chain;
+use Nexus\\Workflow\Prompts\PromptTemplate;
 
 use function Laravel\Ai\agent;
 
@@ -64,14 +64,14 @@ $result = $chain->run(['input' => 'What is RAG?']);
 
 ## 🔗 Package Relationships
 
-`laravel-ai-chain` sits in the Nexus ecosystem:
+`laravel-ai-workflows` sits in the Nexus ecosystem:
 
 ```
 laravel/ai (foundation)
     ↓
-laravel-ai-chain (composition + workflows)
+laravel-ai-workflows (composition + workflows)
     ↓
-laravel-ai-chain
+laravel-ai-workflows
     ├→ Used by: nexus-agents (SLR orchestration)
     ├→ Used by: nexus-php (search coordination)
     └→ Built on: graph-algorithms (PageRank, Louvain)
@@ -80,7 +80,7 @@ laravel-ai-chain
 ## 📦 Installation
 
 ```bash
-composer require nexus/laravel-ai-chain
+composer require nexus/laravel-ai-workflows
 ```
 
 Publish config (optional):

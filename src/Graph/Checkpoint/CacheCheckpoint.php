@@ -1,10 +1,10 @@
 <?php
 
-namespace Nexus\AiChain\Graph\Checkpoint;
+namespace Nexus\Workflow\Graph\Checkpoint;
 
 use Illuminate\Support\Facades\Cache;
-use Nexus\AiChain\Contracts\Checkpointable;
-use Nexus\AiChain\Graph\State;
+use Nexus\Workflow\Contracts\Checkpointable;
+use Nexus\Workflow\Graph\State;
 
 final class CacheCheckpoint implements Checkpointable
 {

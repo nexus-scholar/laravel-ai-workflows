@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Nexus\AiChain\Memory\SummaryMemory;
+use Nexus\Workflow\Memory\SummaryMemory;
 
 it('calls summarizer when threshold is reached', function () {
     $summarizerCalled = false;

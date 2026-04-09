@@ -7,7 +7,7 @@ This guide walks you through installing, configuring, and running your first cha
 ### 1. Add the Package
 
 ```bash
-composer require nexus/laravel-ai-chain
+composer require nexus/laravel-ai-workflows
 ```
 
 ### 2. Publish Configuration (Optional)
@@ -61,8 +61,8 @@ Create a file `app/Examples/FirstChain.php`:
 
 namespace App\Examples;
 
-use Nexus\AiChain\Chains\Chain;
-use Nexus\AiChain\Prompts\PromptTemplate;
+use Nexus\\Workflow\Chains\Chain;
+use Nexus\\Workflow\Prompts\PromptTemplate;
 
 use function Laravel\Ai\agent;
 
@@ -262,8 +262,8 @@ Here's a complete example that brings it all together:
 ```php
 <?php
 
-use Nexus\AiChain\Chains\Chain;
-use Nexus\AiChain\Prompts\PromptTemplate;
+use Nexus\\Workflow\Chains\Chain;
+use Nexus\\Workflow\Prompts\PromptTemplate;
 use function Laravel\Ai\agent;
 
 // Create templates

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Nexus\AiChain\Tests\Unit\Retrieval;
+namespace Nexus\Workflow\Tests\Unit\Retrieval;
 
-use Nexus\AiChain\Retrieval\VectorStoreRetriever;
-use Nexus\AiChain\Tests\TestCase;
+use Nexus\Workflow\Retrieval\VectorStoreRetriever;
+use Nexus\Workflow\Tests\TestCase;
 
 class VectorStoreRetrieverTest extends TestCase
 {

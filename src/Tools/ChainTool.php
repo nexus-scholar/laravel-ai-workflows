@@ -1,12 +1,11 @@
 <?php
 
-namespace Nexus\AiChain\Tools;
+namespace Nexus\Workflow\Tools;
 
 use Illuminate\Contracts\JsonSchema\JsonSchema;
 use Laravel\Ai\Contracts\Tool;
 use Laravel\Ai\Tools\Request;
-use Nexus\AiChain\Contracts\Chain;
-use Stringable;
+use Nexus\Workflow\Contracts\Chain;
 
 final readonly class ChainTool implements Tool
 {

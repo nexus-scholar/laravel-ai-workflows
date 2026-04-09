@@ -1,11 +1,11 @@
 <?php
 
-namespace Nexus\AiChain;
+namespace Nexus\Workflow;
 
 use Laravel\Ai\Contracts\Agent;
-use Nexus\AiChain\Chains\ChainFactory;
-use Nexus\AiChain\Contracts\Chain as ChainContract;
-use Nexus\AiChain\Prompts\PromptTemplate;
+use Nexus\Workflow\Chains\ChainFactory;
+use Nexus\Workflow\Contracts\Chain as ChainContract;
+use Nexus\Workflow\Prompts\PromptTemplate;
 
 final class AiChainManager
 {

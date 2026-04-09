@@ -1,6 +1,6 @@
 # References Index
 
-Deep-dive technical reference materials for laravel-ai-chain.
+Deep-dive technical reference materials for laravel-ai-workflows.
 
 Use these when you need detailed information about specific topics.
 

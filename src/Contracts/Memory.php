@@ -1,6 +1,6 @@
 <?php
 
-namespace Nexus\AiChain\Contracts;
+namespace Nexus\Workflow\Contracts;
 
 interface Memory
 {

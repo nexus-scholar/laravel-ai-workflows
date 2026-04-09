@@ -2,7 +2,7 @@
 
 ## Project Status
 
-The `laravel-ai-chain/.agents/skills/` directory has been **completely augmented** with comprehensive reference materials, updated from outdated APIs to current implementations.
+The `laravel-ai-workflows/.agents/skills/` directory has been **completely augmented** with comprehensive reference materials, updated from outdated APIs to current implementations.
 
 **Total Content Created:** 45.8 KB across 7 files  
 **Code Examples:** 40+  
@@ -238,7 +238,7 @@ All references link to:
 ## File Locations
 
 ```
-laravel-ai-chain/
+laravel-ai-workflows/
 ├── .agents/
 │   └── skills/
 │       ├── SKILLS.md                    (Entry point - 10.2 KB)
@@ -269,7 +269,7 @@ laravel-ai-chain/
 ## What This Enables
 
 ### For AI Agents
-- Discover laravel-ai-chain capabilities independently
+- Discover laravel-ai-workflows capabilities independently
 - Find examples for any task
 - Understand current API deeply
 - Implement features with confidence

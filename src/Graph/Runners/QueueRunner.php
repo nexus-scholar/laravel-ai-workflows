@@ -1,11 +1,11 @@
 <?php
 
-namespace Nexus\AiChain\Graph\Runners;
+namespace Nexus\Workflow\Graph\Runners;
 
 use Illuminate\Support\Str;
-use Nexus\AiChain\Graph\CompiledGraph;
-use Nexus\AiChain\Graph\State;
-use Nexus\AiChain\Jobs\RunGraphNode;
+use Nexus\Workflow\Graph\CompiledGraph;
+use Nexus\Workflow\Graph\State;
+use Nexus\Workflow\Jobs\RunGraphNode;
 use RuntimeException;
 
 final class QueueRunner

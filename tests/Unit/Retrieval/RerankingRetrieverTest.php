@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Nexus\AiChain\Tests\Unit\Retrieval;
+namespace Nexus\Workflow\Tests\Unit\Retrieval;
 
 use Laravel\Ai\Reranking;
 use Laravel\Ai\Responses\Data\Meta;
 use Laravel\Ai\Responses\Data\RankedDocument;
 use Laravel\Ai\Responses\RerankingResponse;
 use Mockery;
-use Nexus\AiChain\Contracts\Retriever;
-use Nexus\AiChain\Retrieval\Document;
-use Nexus\AiChain\Retrieval\RerankingRetriever;
-use Nexus\AiChain\Tests\TestCase;
+use Nexus\Workflow\Contracts\Retriever;
+use Nexus\Workflow\Retrieval\Document;
+use Nexus\Workflow\Retrieval\RerankingRetriever;
+use Nexus\Workflow\Tests\TestCase;
 
 class RerankingRetrieverTest extends TestCase
 {

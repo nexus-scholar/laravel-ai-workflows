@@ -1,4 +1,4 @@
-# `laravel-ai-chain` Roadmap
+# `laravel-ai-workflows` Roadmap
 
 ## Phase 0 — Stabilize the package surface
 - [ ] Add package config and publishable defaults.

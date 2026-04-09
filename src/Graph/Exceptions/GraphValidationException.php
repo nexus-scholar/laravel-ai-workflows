@@ -1,6 +1,6 @@
 <?php
 
-namespace Nexus\AiChain\Graph\Exceptions;
+namespace Nexus\Workflow\Graph\Exceptions;
 
 use InvalidArgumentException;
 

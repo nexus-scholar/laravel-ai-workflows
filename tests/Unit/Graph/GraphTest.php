@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Nexus\AiChain\Tests\Unit\Graph;
+namespace Nexus\Workflow\Tests\Unit\Graph;
 
-use Nexus\AiChain\Graph\Exceptions\GraphValidationException;
-use Nexus\AiChain\Graph\State;
-use Nexus\AiChain\Graph\StateGraph;
+use Nexus\Workflow\Graph\Exceptions\GraphValidationException;
+use Nexus\Workflow\Graph\State;
+use Nexus\Workflow\Graph\StateGraph;
 use RuntimeException;
 
 if (! class_exists(CounterState::class)) {
@@ -106,7 +106,7 @@ it('fails when a node returns a non state value', function () {
     $compiled = $graph->compile();
 
     expect(fn () => $compiled->invoke(new CounterState(0)))
-        ->toThrow(RuntimeException::class, "Node 'bad' must return an instance of Nexus\\AiChain\\Graph\\State.");
+        ->toThrow(RuntimeException::class, "Node 'bad' must return an instance of Nexus\\Workflow\\Graph\\State.");
 });
 
 it('fails when a conditional edge resolves to an unknown node', function () {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Nexus\AiChain\Memory;
+namespace Nexus\Workflow\Memory;
 
 use InvalidArgumentException;
-use Nexus\AiChain\Contracts\Memory;
+use Nexus\Workflow\Contracts\Memory;
 
 /**
  * Compresses old messages into a rolling summary using an LLM.

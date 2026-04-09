@@ -1,6 +1,6 @@
 <?php
 
-namespace Nexus\AiChain\Prompts;
+namespace Nexus\Workflow\Prompts;
 
 final class ChatPromptTemplate
 {

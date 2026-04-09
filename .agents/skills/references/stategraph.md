@@ -71,7 +71,7 @@ $graph->addEdge('retry', 'execute');  // Loop back
 
 ## Building a Graph
 
-1. **Define State** — Extend `Nexus\AiChain\Graph\State`
+1. **Define State** — Extend `Nexus\\Workflow\Graph\State`
 2. **Add Nodes** — Use `addNode(name, callable)`
 3. **Add Edges** — Direct with `addEdge()`, conditional with `addConditionalEdge()`
 4. **Set Entry Point** — `setEntryPoint(name)`

@@ -1,5 +1,5 @@
 {
-    "name": "nexus/laravel-ai-chain",
+    "name": "nexus/laravel-ai-workflows",
     "description": "LangChain + LangGraph port for Laravel, built on top of laravel/ai",
     "keywords": [
         "laravel",
@@ -9,7 +9,7 @@
         "state-graph",
         "rag"
     ],
-    "homepage": "https://github.com/mouadh/nexus/tree/main/laravel-ai-chain",
+    "homepage": "https://github.com/nexus-scholar/laravel-ai-workflows",
     "authors": [
         {
             "name": "Nexus Team",
@@ -40,21 +40,21 @@
     },
     "autoload": {
         "psr-4": {
-            "Nexus\\AiChain\\": "src/"
+            "Nexus\\Workflow\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Nexus\\AiChain\\Tests\\": "tests/"
+            "Nexus\\Workflow\\Tests\\": "tests/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Nexus\\AiChain\\AiChainServiceProvider"
+                "Nexus\\Workflow\\AiChainServiceProvider"
             ],
             "aliases": {
-                "AiChain": "Nexus\\AiChain\\Facades\\AiChain"
+                "AiChain": "Nexus\\Workflow\\Facades\\AiChain"
             }
         }
     },
@@ -67,6 +67,6 @@
     },
     "support": {
         "issues": "https://github.com/mouadh/nexus/issues",
-        "source": "https://github.com/mouadh/nexus/tree/main/laravel-ai-chain"
+        "source": "https://github.com/nexus-scholar/laravel-ai-workflows"
     }
 }

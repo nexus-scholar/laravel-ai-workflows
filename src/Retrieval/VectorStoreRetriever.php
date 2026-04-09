@@ -1,8 +1,8 @@
 <?php
 
-namespace Nexus\AiChain\Retrieval;
+namespace Nexus\Workflow\Retrieval;
 
-use Nexus\AiChain\Contracts\Retriever;
+use Nexus\Workflow\Contracts\Retriever;
 
 final class VectorStoreRetriever implements Retriever
 {

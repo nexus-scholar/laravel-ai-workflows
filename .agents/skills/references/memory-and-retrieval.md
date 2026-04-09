@@ -10,7 +10,7 @@ Memory persists conversation history for multi-turn interactions.
 
 **InMemoryConversation** — Non-persistent (single request):
 ```php
-use Nexus\AiChain\Memory\InMemoryConversation;
+use Nexus\\Workflow\Memory\InMemoryConversation;
 
 $memory = new InMemoryConversation();
 $memory->add('user', 'What is PHP?');
@@ -22,7 +22,7 @@ echo $memory->asString();
 
 **CacheConversationMemory** — Persistent via Laravel cache:
 ```php
-use Nexus\AiChain\Memory\CacheConversationMemory;
+use Nexus\\Workflow\Memory\CacheConversationMemory;
 
 $memory = new CacheConversationMemory(
     key: "chat.$userId",
@@ -38,7 +38,7 @@ $recovered = new CacheConversationMemory(key: "chat.$userId");
 
 **SummaryMemory** — Smart token reduction:
 ```php
-use Nexus\AiChain\Memory\SummaryMemory;
+use Nexus\\Workflow\Memory\SummaryMemory;
 use function Laravel\Ai\agent;
 
 $memory = new SummaryMemory(
@@ -53,8 +53,8 @@ $memory = new SummaryMemory(
 ### Using Memory with Chains
 
 ```php
-use Nexus\AiChain\Chains\Chain;
-use Nexus\AiChain\Prompts\PromptTemplate;
+use Nexus\\Workflow\Chains\Chain;
+use Nexus\\Workflow\Prompts\PromptTemplate;
 
 $memory = new CacheConversationMemory(key: "user.$userId");
 
@@ -75,7 +75,7 @@ $chain->run(['input' => 'How does it work?']);  // Sees history
 
 ### Memory Interface
 
-All memory implements `Nexus\AiChain\Contracts\Memory`:
+All memory implements `Nexus\\Workflow\Contracts\Memory`:
 
 ```php
 interface Memory {
@@ -113,7 +113,7 @@ Retrievers inject external data into prompts for context-aware responses.
 
 **VectorStoreRetriever** — Semantic search via embeddings:
 ```php
-use Nexus\AiChain\Retrieval\VectorStoreRetriever;
+use Nexus\\Workflow\Retrieval\VectorStoreRetriever;
 
 $retriever = new VectorStoreRetriever(
     vectorStore: app('vector-store'),
@@ -125,7 +125,7 @@ $documents = $retriever->retrieve('How do I deploy?');
 
 **HybridRetriever** — Vector + lexical search:
 ```php
-use Nexus\AiChain\Retrieval\HybridRetriever;
+use Nexus\\Workflow\Retrieval\HybridRetriever;
 
 $retriever = new HybridRetriever(
     vectorRetriever: new VectorStoreRetriever($vectorStore),
@@ -136,7 +136,7 @@ $retriever = new HybridRetriever(
 
 **RerankingRetriever** — Re-score results:
 ```php
-use Nexus\AiChain\Retrieval\RerankingRetriever;
+use Nexus\\Workflow\Retrieval\RerankingRetriever;
 
 $retriever = new RerankingRetriever(
     baseRetriever: new VectorStoreRetriever($store),
@@ -166,7 +166,7 @@ $answer = $chain->run(['input' => 'How do I deploy Laravel?']);
 
 ### Document Model
 
-Retrievers return `Nexus\AiChain\Retrieval\Document`:
+Retrievers return `Nexus\\Workflow\Retrieval\Document`:
 
 ```php
 class Document
@@ -180,7 +180,7 @@ class Document
 
 ### Custom Retriever
 
-Implement `Nexus\AiChain\Contracts\Retriever`:
+Implement `Nexus\\Workflow\Contracts\Retriever`:
 
 ```php
 class DatabaseRetriever implements Retriever

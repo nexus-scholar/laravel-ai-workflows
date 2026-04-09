@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Nexus\AiChain\Prompts\PromptTemplate;
+use Nexus\Workflow\Prompts\PromptTemplate;
 
 it('extracts input variables', function () {
     $template = PromptTemplate::from('Hello {name}, your role is {role}.');

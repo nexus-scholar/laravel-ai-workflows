@@ -1,11 +1,11 @@
 # Documentation Summary
 
-This document provides an overview of the complete laravel-ai-chain documentation structure.
+This document provides an overview of the complete laravel-ai-workflows documentation structure.
 
 ## 📁 File Structure
 
 ```
-laravel-ai-chain/docs/
+laravel-ai-workflows/docs/
 ├── README.md                      # Main entry point & navigation
 ├── 01-getting-started.md          # Installation, first chain, basic concepts
 ├── 02-core-concepts.md            # Chains vs graphs, immutability, key flows

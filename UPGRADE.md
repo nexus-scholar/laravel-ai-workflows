@@ -6,9 +6,9 @@ This guide documents migration notes for users moving from pre-release/local sna
 
 ### 1) Package entrypoints
 - Preferred Laravel entrypoint is `AiChainManager` from the container:
-  - `app(Nexus\AiChain\AiChainManager::class)`
+  - `app(Nexus\\Workflow\AiChainManager::class)`
 - Optional alias is available via package discovery:
-  - `AiChain` -> `Nexus\AiChain\Facades\AiChain`
+  - `AiChain` -> `Nexus\\Workflow\Facades\AiChain`
 
 ### 2) Chain composition
 - `Chain` remains compatible with prior usage.

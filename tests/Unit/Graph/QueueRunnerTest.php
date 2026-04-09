@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Nexus\AiChain\Tests\Unit\Graph;
+namespace Nexus\Workflow\Tests\Unit\Graph;
 
 use Illuminate\Support\Facades\Bus;
-use Nexus\AiChain\Graph\Runners\QueueRunner;
-use Nexus\AiChain\Graph\State;
-use Nexus\AiChain\Graph\StateGraph;
-use Nexus\AiChain\Jobs\RunGraphNode;
-use Nexus\AiChain\Tests\TestCase;
+use Nexus\Workflow\Graph\Runners\QueueRunner;
+use Nexus\Workflow\Graph\State;
+use Nexus\Workflow\Graph\StateGraph;
+use Nexus\Workflow\Jobs\RunGraphNode;
+use Nexus\Workflow\Tests\TestCase;
 use RuntimeException;
 
 if (! class_exists(CounterState::class)) {

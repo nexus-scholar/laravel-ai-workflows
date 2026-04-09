@@ -7,8 +7,8 @@ This guide covers all aspects of building, composing, and executing chains.
 ### Basic Creation
 
 ```php
-use Nexus\AiChain\Chains\Chain;
-use Nexus\AiChain\Prompts\PromptTemplate;
+use Nexus\\Workflow\Chains\Chain;
+use Nexus\\Workflow\Prompts\PromptTemplate;
 use function Laravel\Ai\agent;
 
 $chain = Chain::make(
@@ -23,7 +23,7 @@ $chain = Chain::make(
 For more complex chains, use `ChainFactory`:
 
 ```php
-use Nexus\AiChain\Chains\ChainFactory;
+use Nexus\\Workflow\Chains\ChainFactory;
 
 $chain = ChainFactory::chain(
     agent(),
@@ -135,7 +135,7 @@ $key = $chain->outputKey();   // 'answer'
 Track chat history:
 
 ```php
-use Nexus\AiChain\Memory\InMemoryConversation;
+use Nexus\\Workflow\Memory\InMemoryConversation;
 
 $memory = new InMemoryConversation();
 
@@ -163,7 +163,7 @@ $result2 = $chain->run(['input' => 'Tell me more']);
 For production, use cache:
 
 ```php
-use Nexus\AiChain\Memory\CacheConversationMemory;
+use Nexus\\Workflow\Memory\CacheConversationMemory;
 
 $memory = new CacheConversationMemory(
     key: 'conversation.user.123',
@@ -178,7 +178,7 @@ $chain = Chain::make($agent, $prompt)->withMemory($memory);
 Reduce tokens by summarizing:
 
 ```php
-use Nexus\AiChain\Memory\SummaryMemory;
+use Nexus\\Workflow\Memory\SummaryMemory;
 
 $memory = new SummaryMemory(
     maxMessages: 10,  // After 10, summarize oldest
@@ -193,7 +193,7 @@ $chain = Chain::make($agent, $prompt)->withMemory($memory);
 ### Vector Store Retriever
 
 ```php
-use Nexus\AiChain\Retrieval\VectorStoreRetriever;
+use Nexus\\Workflow\Retrieval\VectorStoreRetriever;
 
 $retriever = new VectorStoreRetriever(
     vectorStore: app('vector-store'),  // From Laravel container
@@ -219,7 +219,7 @@ $result = $chain->run(['input' => 'How does DDD work?']);
 Combine vector + BM25 search:
 
 ```php
-use Nexus\AiChain\Retrieval\HybridRetriever;
+use Nexus\\Workflow\Retrieval\HybridRetriever;
 
 $retriever = new HybridRetriever(
     vectorRetriever: new VectorStoreRetriever($vectorStore),
@@ -236,7 +236,7 @@ $chain = Chain::make($agent, $prompt)
 Re-score results before returning:
 
 ```php
-use Nexus\AiChain\Retrieval\RerankingRetriever;
+use Nexus\\Workflow\Retrieval\RerankingRetriever;
 
 $retriever = new RerankingRetriever(
     baseRetriever: new VectorStoreRetriever($vectorStore),

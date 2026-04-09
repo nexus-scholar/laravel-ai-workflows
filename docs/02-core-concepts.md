@@ -1,6 +1,6 @@
 # Core Concepts
 
-This document explains the foundational concepts in laravel-ai-chain. Understanding these will help you design better workflows.
+This document explains the foundational concepts in laravel-ai-workflows. Understanding these will help you design better workflows.
 
 ## 1. Chains vs. State Graphs
 
@@ -68,7 +68,7 @@ $result = $graph->compile()->invoke($initialState);
 
 ## 2. Immutable State
 
-State in laravel-ai-chain is **always immutable**. This is foundational.
+State in laravel-ai-workflows is **always immutable**. This is foundational.
 
 ### Why Immutable?
 
@@ -207,7 +207,7 @@ Memory stores conversation history so the AI understands context.
 ### Usage
 
 ```php
-use Nexus\AiChain\Memory\InMemoryConversation;
+use Nexus\\Workflow\Memory\InMemoryConversation;
 
 $memory = new InMemoryConversation();
 $memory->add('user', 'What is RAG?');
@@ -235,7 +235,7 @@ $result = $chain->run(['input' => 'Tell me more']);
 ### Example
 
 ```php
-use Nexus\AiChain\Retrieval\VectorStoreRetriever;
+use Nexus\\Workflow\Retrieval\VectorStoreRetriever;
 
 $retriever = new VectorStoreRetriever($vectorStore);
 

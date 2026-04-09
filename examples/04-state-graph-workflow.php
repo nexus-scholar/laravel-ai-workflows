@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Nexus\AiChain\Graph\State;
-use Nexus\AiChain\Graph\StateGraph;
+use Nexus\Workflow\Graph\State;
+use Nexus\Workflow\Graph\StateGraph;
 
 require __DIR__.'/../vendor/autoload.php';
 

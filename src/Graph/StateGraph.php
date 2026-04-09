@@ -1,10 +1,10 @@
 <?php
 
-namespace Nexus\AiChain\Graph;
+namespace Nexus\Workflow\Graph;
 
 use InvalidArgumentException;
-use Nexus\AiChain\Contracts\Node;
-use Nexus\AiChain\Graph\Exceptions\GraphValidationException;
+use Nexus\Workflow\Contracts\Node;
+use Nexus\Workflow\Graph\Exceptions\GraphValidationException;
 
 final class StateGraph
 {

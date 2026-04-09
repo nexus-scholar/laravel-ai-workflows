@@ -1,4 +1,4 @@
-# `laravel-ai-chain` Implementation Plan
+# `laravel-ai-workflows` Implementation Plan
 
 ## Goal
 Make the package production-ready by hardening the bootstrap, graph runtime, queue execution, state handling, and test coverage.

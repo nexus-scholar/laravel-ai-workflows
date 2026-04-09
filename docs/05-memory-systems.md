@@ -9,7 +9,7 @@ Memory allows chains and graphs to maintain context across multiple interactions
 Stores history in PHP memory. Best for single-session workflows.
 
 ```php
-use Nexus\AiChain\Memory\InMemoryConversation;
+use Nexus\\Workflow\Memory\InMemoryConversation;
 
 $memory = new InMemoryConversation();
 $memory->add('user', 'What is PHP?');
@@ -35,7 +35,7 @@ $memory->clear();
 Stores history in Laravel cache (Redis, File, etc). Best for multi-user scenarios.
 
 ```php
-use Nexus\AiChain\Memory\CacheConversationMemory;
+use Nexus\\Workflow\Memory\CacheConversationMemory;
 
 $memory = new CacheConversationMemory(
     key: 'chat.user.123',     // Unique per conversation
@@ -58,7 +58,7 @@ echo count($retrieved->messages());  // 2 messages (persisted!)
 Keeps recent messages, summarizes older ones to reduce tokens.
 
 ```php
-use Nexus\AiChain\Memory\SummaryMemory;
+use Nexus\\Workflow\Memory\SummaryMemory;
 use function Laravel\Ai\agent;
 
 $memory = new SummaryMemory(
@@ -84,9 +84,9 @@ echo count($messages);  // Always ~10, not 30
 ### Basic Usage
 
 ```php
-use Nexus\AiChain\Chains\Chain;
-use Nexus\AiChain\Prompts\PromptTemplate;
-use Nexus\AiChain\Memory\InMemoryConversation;
+use Nexus\\Workflow\Chains\Chain;
+use Nexus\\Workflow\Prompts\PromptTemplate;
+use Nexus\\Workflow\Memory\InMemoryConversation;
 use function Laravel\Ai\agent;
 
 $memory = new InMemoryConversation();
@@ -154,9 +154,9 @@ echo $conversation->ask('Tell me a joke.');          // Sees previous exchange
 Memory can be part of your state:
 
 ```php
-use Nexus\AiChain\Graph\State;
-use Nexus\AiChain\Graph\StateGraph;
-use Nexus\AiChain\Memory\InMemoryConversation;
+use Nexus\\Workflow\Graph\State;
+use Nexus\\Workflow\Graph\StateGraph;
+use Nexus\\Workflow\Memory\InMemoryConversation;
 
 final class ConversationState extends State
 {
@@ -293,7 +293,7 @@ class ChatController
 Extend the interface for custom behavior:
 
 ```php
-use Nexus\AiChain\Contracts\Memory;
+use Nexus\\Workflow\Contracts\Memory;
 
 class DatabaseMemory implements Memory
 {
@@ -348,9 +348,9 @@ $chain = Chain::make($agent, $prompt)->withMemory($memory);
 Combine memory and retrieval:
 
 ```php
-use Nexus\AiChain\Chains\Chain;
-use Nexus\AiChain\Memory\CacheConversationMemory;
-use Nexus\AiChain\Retrieval\VectorStoreRetriever;
+use Nexus\\Workflow\Chains\Chain;
+use Nexus\\Workflow\Memory\CacheConversationMemory;
+use Nexus\\Workflow\Retrieval\VectorStoreRetriever;
 
 $memory = new CacheConversationMemory(key: "user.$userId");
 

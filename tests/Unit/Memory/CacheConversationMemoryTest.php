@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Nexus\AiChain\Tests\Unit\Memory;
+namespace Nexus\Workflow\Tests\Unit\Memory;
 
 use Illuminate\Support\Facades\Cache;
-use Nexus\AiChain\Memory\CacheConversationMemory;
-use Nexus\AiChain\Tests\TestCase;
+use Nexus\Workflow\Memory\CacheConversationMemory;
+use Nexus\Workflow\Tests\TestCase;
 
 class CacheConversationMemoryTest extends TestCase
 {

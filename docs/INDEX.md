@@ -84,7 +84,7 @@ Quick reference for all documentation files.
 
 | Question | Answer |
 |----------|--------|
-| Install laravel-ai-chain? | [Getting Started - Installation](./01-getting-started.md#installation) |
+| Install laravel-ai-workflows? | [Getting Started - Installation](./01-getting-started.md#installation) |
 | Create my first chain? | [Tutorial 1](./tutorials/01-beginner-first-chain.md) |
 | Add memory to a chain? | [Memory Systems](./05-memory-systems.md) or [Tutorial 2](./tutorials/02-memory-and-conversation.md) |
 | Chain multiple chains? | [Chains Guide - Chaining](./03-chains-guide.md#chaining-chains) or [Tutorial 3](./tutorials/03-chains-composition.md) |

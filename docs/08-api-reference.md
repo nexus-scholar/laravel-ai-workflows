@@ -1,6 +1,6 @@
 # API Reference
 
-Complete method signatures and contracts for laravel-ai-chain.
+Complete method signatures and contracts for laravel-ai-workflows.
 
 ## Table of Contents
 

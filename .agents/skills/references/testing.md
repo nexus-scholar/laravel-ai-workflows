@@ -17,8 +17,8 @@ composer require --dev pestphp/pest
 Create a predictable fake agent:
 
 ```php
-use Nexus\AiChain\Chains\Chain;
-use Nexus\AiChain\Prompts\PromptTemplate;
+use Nexus\\Workflow\Chains\Chain;
+use Nexus\\Workflow\Prompts\PromptTemplate;
 
 class DemoAgent
 {
@@ -70,8 +70,8 @@ it('handles multi-turn chains', function () {
 ### Simple State Test
 
 ```php
-use Nexus\AiChain\Graph\State;
-use Nexus\AiChain\Graph\StateGraph;
+use Nexus\\Workflow\Graph\State;
+use Nexus\\Workflow\Graph\StateGraph;
 
 final class TestState extends State
 {
@@ -140,7 +140,7 @@ it('routes based on state', function () {
 ### InMemory Test
 
 ```php
-use Nexus\AiChain\Memory\InMemoryConversation;
+use Nexus\\Workflow\Memory\InMemoryConversation;
 
 it('stores conversation', function () {
     $memory = new InMemoryConversation();
@@ -158,7 +158,7 @@ it('stores conversation', function () {
 ### Cache Memory Test
 
 ```php
-use Nexus\AiChain\Memory\CacheConversationMemory;
+use Nexus\\Workflow\Memory\CacheConversationMemory;
 
 it('persists to cache', function () {
     $memory1 = new CacheConversationMemory(key: 'test-conv', ttl: 3600);
@@ -178,8 +178,8 @@ it('persists to cache', function () {
 ## Mock Retriever Testing
 
 ```php
-use Nexus\AiChain\Retrieval\Document;
-use Nexus\AiChain\Contracts\Retriever;
+use Nexus\\Workflow\Retrieval\Document;
+use Nexus\\Workflow\Contracts\Retriever;
 
 class MockRetriever implements Retriever
 {

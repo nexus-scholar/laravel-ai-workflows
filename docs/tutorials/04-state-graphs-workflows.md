@@ -22,8 +22,8 @@ Create `app/Examples/StateGraphDemo.php`:
 
 namespace App\Examples;
 
-use Nexus\AiChain\Graph\State;
-use Nexus\AiChain\Graph\StateGraph;
+use Nexus\\Workflow\Graph\State;
+use Nexus\\Workflow\Graph\StateGraph;
 
 // 1️⃣ Define a custom state class
 final class DocumentState extends State

@@ -1,9 +1,9 @@
 ---
-name: laravel-ai-chain
+name: laravel-ai-workflows
 description: Composition framework for building AI workflows with laravel/ai. Chains, state graphs, memory, and RAG systems with type-safe immutable state.
 ---
 
-# Laravel AI Chain — Agent Skills & Task Reference
+# Laravel AI Workflows — Agent Skills & Task Reference
 
 This file helps AI agents understand the package structure and discover common tasks.
 
@@ -31,8 +31,8 @@ This file helps AI agents understand the package structure and discover common t
 ### 1. Build a Simple Chain
 
 ```php
-use Nexus\AiChain\Chains\Chain;
-use Nexus\AiChain\Prompts\PromptTemplate;
+use Nexus\\Workflow\Chains\Chain;
+use Nexus\\Workflow\Prompts\PromptTemplate;
 use function Laravel\Ai\agent;
 
 $chain = Chain::make(
@@ -51,7 +51,7 @@ $result = $chain->run(['input' => 'What is RAG?']);
 ### 2. Create a Multi-Stage Pipeline
 
 ```php
-use Nexus\AiChain\Chains\ChainFactory;
+use Nexus\\Workflow\Chains\ChainFactory;
 
 $pipeline = ChainFactory::chain($agent1, $p1, 'draft')
     ->thenPrompt($agent2, $p2, 'edited')
@@ -68,7 +68,7 @@ $result = $pipeline->run(['topic' => 'AI']);
 ### 3. Add Conversation Memory
 
 ```php
-use Nexus\AiChain\Memory\CacheConversationMemory;
+use Nexus\\Workflow\Memory\CacheConversationMemory;
 
 $memory = new CacheConversationMemory(key: "chat.$userId", ttl: 86400);
 
@@ -86,8 +86,8 @@ $chain->run(['input' => 'How do I use it?']);  // Remembers!
 ### 4. Build a State Graph Workflow
 
 ```php
-use Nexus\AiChain\Graph\State;
-use Nexus\AiChain\Graph\StateGraph;
+use Nexus\\Workflow\Graph\State;
+use Nexus\\Workflow\Graph\StateGraph;
 
 final class ProcessingState extends State
 {
@@ -131,7 +131,7 @@ $result = $graph->compile()->invoke(new ProcessingState(data: 'sample'));
 ### 5. Implement RAG (Retrieval-Augmented Generation)
 
 ```php
-use Nexus\AiChain\Retrieval\VectorStoreRetriever;
+use Nexus\\Workflow\Retrieval\VectorStoreRetriever;
 
 $chain = Chain::make(
     agent(),
@@ -162,7 +162,7 @@ $answer = $chain->run(['input' => 'How do I deploy?']);
 **When:** You need a workflow with typed state variables.
 
 **Steps:**
-1. Extend `Nexus\AiChain\Graph\State`
+1. Extend `Nexus\\Workflow\Graph\State`
 2. Implement `toArray()` and `fromArray(array $data)`
 3. Use `$state->with([...])` for immutable updates
 4. **Example:** See [Tutorial 4](../../docs/tutorials/04-state-graphs-workflows.md)
@@ -175,7 +175,7 @@ $answer = $chain->run(['input' => 'How do I deploy?']);
 
 **Steps:**
 1. Create a node as a callable: `fn(State $s) => $s->with([...updates...])`
-2. Or implement `Nexus\AiChain\Contracts\Node` interface
+2. Or implement `Nexus\\Workflow\Contracts\Node` interface
 3. Add to graph: `$graph->addNode('name', $nodeCallable)`
 4. **Example:** See [State Graphs](../../docs/04-state-graphs.md)
 
@@ -197,9 +197,9 @@ $answer = $chain->run(['input' => 'How do I deploy?']);
 **When:** Need to search a new data source.
 
 **Steps:**
-1. Implement `Nexus\AiChain\Contracts\Retriever`
+1. Implement `Nexus\\Workflow\Contracts\Retriever`
 2. Implement `retrieve(string $query, int $topK = 5): array`
-3. Return array of `Nexus\AiChain\Retrieval\Document`
+3. Return array of `Nexus\\Workflow\Retrieval\Document`
 4. **Example:** See [Retrieval & RAG](../../docs/06-retrieval-rag.md)
 
 ---
@@ -207,7 +207,7 @@ $answer = $chain->run(['input' => 'How do I deploy?']);
 ## File Structure
 
 ```
-laravel-ai-chain/
+laravel-ai-workflows/
 ├── src/
 │   ├── Chains/
 │   ├── Graph/

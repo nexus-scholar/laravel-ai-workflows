@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Nexus\AiChain\Prompts\ChatPromptTemplate;
+use Nexus\Workflow\Prompts\ChatPromptTemplate;
 
 it('formats multiple messages correctly', function () {
     $template = ChatPromptTemplate::fromMessages([

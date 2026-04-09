@@ -1,11 +1,11 @@
 # Tutorial 1: Your First Chain (15 minutes)
 
-In this tutorial, you'll create and run your first chain. No prior knowledge of laravel-ai-chain needed!
+In this tutorial, you'll create and run your first chain. No prior knowledge of laravel-ai-workflows needed!
 
 ## Prerequisites
 
 ✅ PHP 8.3+  
-✅ Laravel project with laravel-ai-chain installed  
+✅ Laravel project with laravel-ai-workflows installed  
 ✅ AI provider configured (OpenAI, Anthropic, etc.)  
 
 ## What You'll Learn
@@ -24,8 +24,8 @@ Create a new file `app/Examples/FirstChain.php`:
 
 namespace App\Examples;
 
-use Nexus\AiChain\Chains\Chain;
-use Nexus\AiChain\Prompts\PromptTemplate;
+use Nexus\\Workflow\Chains\Chain;
+use Nexus\\Workflow\Prompts\PromptTemplate;
 use function Laravel\Ai\agent;
 
 class FirstChain

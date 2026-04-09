@@ -1,11 +1,11 @@
 <?php
 
-namespace Nexus\AiChain\Chains;
+namespace Nexus\Workflow\Chains;
 
 use InvalidArgumentException;
 use Laravel\Ai\Contracts\Agent;
-use Nexus\AiChain\Contracts\Chain as ChainContract;
-use Nexus\AiChain\Prompts\PromptTemplate;
+use Nexus\Workflow\Contracts\Chain as ChainContract;
+use Nexus\Workflow\Prompts\PromptTemplate;
 
 final class ChainFactory
 {

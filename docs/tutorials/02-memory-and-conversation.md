@@ -23,9 +23,9 @@ Create `app/Examples/MemoryChatbot.php`:
 
 namespace App\Examples;
 
-use Nexus\AiChain\Chains\Chain;
-use Nexus\AiChain\Memory\InMemoryConversation;
-use Nexus\AiChain\Prompts\PromptTemplate;
+use Nexus\\Workflow\Chains\Chain;
+use Nexus\\Workflow\Memory\InMemoryConversation;
+use Nexus\\Workflow\Prompts\PromptTemplate;
 use function Laravel\Ai\agent;
 
 class MemoryChatbot
@@ -134,7 +134,7 @@ echo $memory->asString();
 For production, persist memory across requests:
 
 ```php
-use Nexus\AiChain\Memory\CacheConversationMemory;
+use Nexus\\Workflow\Memory\CacheConversationMemory;
 
 class PersistentChatbot
 {
@@ -190,9 +190,9 @@ Edit `app/Http/Controllers/ChatController.php`:
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Nexus\AiChain\Chains\Chain;
-use Nexus\AiChain\Memory\CacheConversationMemory;
-use Nexus\AiChain\Prompts\PromptTemplate;
+use Nexus\\Workflow\Chains\Chain;
+use Nexus\\Workflow\Memory\CacheConversationMemory;
+use Nexus\\Workflow\Prompts\PromptTemplate;
 
 class ChatController extends Controller
 {
@@ -256,7 +256,7 @@ Route::middleware('auth:api')->group(function () {
 For long conversations, summarize old messages:
 
 ```php
-use Nexus\AiChain\Memory\SummaryMemory;
+use Nexus\\Workflow\Memory\SummaryMemory;
 use function Laravel\Ai\agent;
 
 $memory = new SummaryMemory(

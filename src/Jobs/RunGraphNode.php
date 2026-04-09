@@ -1,6 +1,6 @@
 <?php
 
-namespace Nexus\AiChain\Jobs;
+namespace Nexus\Workflow\Jobs;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -8,9 +8,9 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\App;
-use Nexus\AiChain\Graph\CompiledGraph;
-use Nexus\AiChain\Graph\State;
-use Nexus\AiChain\Graph\StateGraph;
+use Nexus\Workflow\Graph\CompiledGraph;
+use Nexus\Workflow\Graph\State;
+use Nexus\Workflow\Graph\StateGraph;
 use RuntimeException;
 
 class RunGraphNode implements ShouldQueue

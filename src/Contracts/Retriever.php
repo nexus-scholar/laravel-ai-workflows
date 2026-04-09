@@ -1,8 +1,8 @@
 <?php
 
-namespace Nexus\AiChain\Contracts;
+namespace Nexus\Workflow\Contracts;
 
-use Nexus\AiChain\Retrieval\Document;
+use Nexus\Workflow\Retrieval\Document;
 
 interface Retriever
 {

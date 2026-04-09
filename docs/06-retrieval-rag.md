@@ -30,7 +30,7 @@ Query: "How do I deploy Laravel?"
 Semantic search using embeddings:
 
 ```php
-use Nexus\AiChain\Retrieval\VectorStoreRetriever;
+use Nexus\\Workflow\Retrieval\VectorStoreRetriever;
 
 $retriever = new VectorStoreRetriever(
     vectorStore: app('vector-store'),  // From Laravel container
@@ -51,9 +51,9 @@ $result = $chain->run(['input' => 'Question here']);
 Combines semantic (vector) + lexical (BM25) search:
 
 ```php
-use Nexus\AiChain\Retrieval\HybridRetriever;
-use Nexus\AiChain\Retrieval\VectorStoreRetriever;
-use Nexus\AiChain\Retrieval\LexicalRetriever;
+use Nexus\\Workflow\Retrieval\HybridRetriever;
+use Nexus\\Workflow\Retrieval\VectorStoreRetriever;
+use Nexus\\Workflow\Retrieval\LexicalRetriever;
 
 $retriever = new HybridRetriever(
     vectorRetriever: new VectorStoreRetriever($vectorStore),
@@ -70,7 +70,7 @@ $chain = Chain::make($agent, $prompt)
 Re-scores results using a cross-encoder model:
 
 ```php
-use Nexus\AiChain\Retrieval\RerankingRetriever;
+use Nexus\\Workflow\Retrieval\RerankingRetriever;
 
 $retriever = new RerankingRetriever(
     baseRetriever: new VectorStoreRetriever($vectorStore),
@@ -114,7 +114,7 @@ foreach ($documents as $doc) {
 ### Step 2: Create Retriever
 
 ```php
-use Nexus\AiChain\Retrieval\VectorStoreRetriever;
+use Nexus\\Workflow\Retrieval\VectorStoreRetriever;
 
 $retriever = new VectorStoreRetriever(
     vectorStore: app('vector-store'),
@@ -140,7 +140,7 @@ PROMPT);
 ### Step 4: Create Chain
 
 ```php
-use Nexus\AiChain\Chains\Chain;
+use Nexus\\Workflow\Chains\Chain;
 use function Laravel\Ai\agent;
 
 $chain = Chain::make(
@@ -181,7 +181,7 @@ $context = implode("\n\n", [
 ### Custom Formatting
 
 ```php
-use Nexus\AiChain\Retrieval\VectorStoreRetriever;
+use Nexus\\Workflow\Retrieval\VectorStoreRetriever;
 
 class CustomRetriever extends VectorStoreRetriever
 {
@@ -392,7 +392,7 @@ $memory->add('assistant', $answer);
 ### Document Model
 
 ```php
-use Nexus\AiChain\Retrieval\Document;
+use Nexus\\Workflow\Retrieval\Document;
 
 $doc = new Document(
     id: 'doc-123',

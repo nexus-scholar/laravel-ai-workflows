@@ -1,4 +1,4 @@
-# Laravel AI Chain
+# Laravel AI Workflows
 
 <div align="center">
 
@@ -16,7 +16,7 @@
 
 ## Overview
 
-Laravel AI Chain is a composition framework for building AI workflows with `laravel/ai`. 
+Laravel AI Workflows is a composition framework for building AI workflows with `laravel/ai`. 
 
 Build chains, state graphs, memory-driven conversations, and retrieval-augmented generation (RAG)—with Laravel's fluent syntax and type safety.
 
@@ -50,7 +50,7 @@ $chain->withRetriever(new VectorStoreRetriever($store, topK: 5));
 ## Installation
 
 ```bash
-composer require nexus/laravel-ai-chain
+composer require nexus/laravel-ai-workflows
 
 # Optional: publish config
 php artisan vendor:publish --tag=ai-chain-config
@@ -105,7 +105,7 @@ See [examples/](./examples/) directory.
 
 ## Architecture
 
-Laravel AI Chain is built on three core principles:
+Laravel AI Workflows is built on three core principles:
 
 1. **Immutable State** — Every workflow transition creates new state; no mutations
 2. **Type Safety** — Strict typing validated at runtime across all boundaries

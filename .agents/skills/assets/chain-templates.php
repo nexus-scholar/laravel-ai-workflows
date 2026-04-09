@@ -5,13 +5,13 @@
  * Copy and customize this template for common tasks
  */
 
-use Nexus\AiChain\Chains\Chain;
-use Nexus\AiChain\Chains\ChainFactory;
-use Nexus\AiChain\Graph\State;
-use Nexus\AiChain\Graph\StateGraph;
-use Nexus\AiChain\Memory\CacheConversationMemory;
-use Nexus\AiChain\Prompts\PromptTemplate;
-use Nexus\AiChain\Retrieval\VectorStoreRetriever;
+use Nexus\Workflow\Chains\Chain;
+use Nexus\Workflow\Chains\ChainFactory;
+use Nexus\Workflow\Graph\State;
+use Nexus\Workflow\Graph\StateGraph;
+use Nexus\Workflow\Memory\CacheConversationMemory;
+use Nexus\Workflow\Prompts\PromptTemplate;
+use Nexus\Workflow\Retrieval\VectorStoreRetriever;
 use function Laravel\Ai\agent;
 
 // ============================================================

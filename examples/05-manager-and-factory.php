@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-use Nexus\AiChain\AiChainManager;
-use Nexus\AiChain\Examples\Support\DemoAgent;
-use Nexus\AiChain\Prompts\PromptTemplate;
+use Nexus\Workflow\AiChainManager;
+use Nexus\Workflow\Examples\Support\DemoAgent;
+use Nexus\Workflow\Prompts\PromptTemplate;
 
 require __DIR__.'/../vendor/autoload.php';
 require __DIR__.'/Support/DemoAgent.php';

@@ -1,4 +1,4 @@
-# `laravel-ai-chain` Task Breakdown
+# `laravel-ai-workflows` Task Breakdown
 
 ## 1) Stabilize the package surface
 - [x] Add `config/ai-chain.php` with defaults for graph execution, checkpointing, memory, and retrieval.

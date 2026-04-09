@@ -3,11 +3,11 @@
 declare(strict_types=1);
 
 use Laravel\Ai\AnonymousAgent;
-use Nexus\AiChain\Chains\Chain;
-use Nexus\AiChain\Chains\ChainFactory;
-use Nexus\AiChain\Chains\SequentialChain;
-use Nexus\AiChain\Contracts\Chain as ChainContract;
-use Nexus\AiChain\Prompts\PromptTemplate;
+use Nexus\Workflow\Chains\Chain;
+use Nexus\Workflow\Chains\ChainFactory;
+use Nexus\Workflow\Chains\SequentialChain;
+use Nexus\Workflow\Contracts\Chain as ChainContract;
+use Nexus\Workflow\Prompts\PromptTemplate;
 
 use function Laravel\Ai\agent;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Nexus\AiChain\Graph;
+namespace Nexus\Workflow\Graph;
 
 use Closure;
 

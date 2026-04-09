@@ -22,9 +22,9 @@ Create `app/Examples/SimpleRAG.php`:
 
 namespace App\Examples;
 
-use Nexus\AiChain\Chains\Chain;
-use Nexus\AiChain\Prompts\PromptTemplate;
-use Nexus\AiChain\Retrieval\VectorStoreRetriever;
+use Nexus\\Workflow\Chains\Chain;
+use Nexus\\Workflow\Prompts\PromptTemplate;
+use Nexus\\Workflow\Retrieval\VectorStoreRetriever;
 use function Laravel\Ai\agent;
 
 class SimpleRAG
@@ -131,7 +131,7 @@ foreach ($documents as $doc) {
 Combine semantic (vector) + lexical (keyword) search:
 
 ```php
-use Nexus\AiChain\Retrieval\HybridRetriever;
+use Nexus\\Workflow\Retrieval\HybridRetriever;
 
 class HybridRAG
 {
@@ -165,7 +165,7 @@ Benefits:
 ## Step 4: Reranking for Better Results
 
 ```php
-use Nexus\AiChain\Retrieval\RerankingRetriever;
+use Nexus\\Workflow\Retrieval\RerankingRetriever;
 
 class RerankingRAG
 {
@@ -200,7 +200,7 @@ class RerankingRAG
 Combine retrieval and conversation memory:
 
 ```php
-use Nexus\AiChain\Memory\CacheConversationMemory;
+use Nexus\\Workflow\Memory\CacheConversationMemory;
 
 class ConversationalRAG
 {

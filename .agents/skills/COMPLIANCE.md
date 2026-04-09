@@ -2,7 +2,7 @@
 
 ## Overview
 
-The `laravel-ai-chain` skill has been refactored to comply with the **agentskills.io specification** (https://agentskills.io/specification).
+The `laravel-ai-workflows` skill has been refactored to comply with the **agentskills.io specification** (https://agentskills.io/specification).
 
 **Compliance Status:** ✅ **FULLY COMPLIANT**
 
@@ -13,7 +13,7 @@ The `laravel-ai-chain` skill has been refactored to comply with the **agentskill
 ✅ Matches specification requirements:
 
 ```
-laravel-ai-chain/.agents/skills/
+laravel-ai-workflows/.agents/skills/
 ├── SKILL.md              # ✅ Required: metadata + instructions
 ├── scripts/              # ✅ Optional: executable code
 │   ├── validate.sh
@@ -37,7 +37,7 @@ laravel-ai-chain/.agents/skills/
 
 ### Required Fields
 
-✅ **name**: `laravel-ai-chain`
+✅ **name**: `laravel-ai-workflows`
 - Lowercase letters, numbers, hyphens only: ✅
 - Does not start/end with hyphen: ✅
 - No consecutive hyphens: ✅
@@ -63,7 +63,7 @@ laravel-ai-chain/.agents/skills/
 ```yaml
 author: nexus-team
 version: "1.0"
-package: nexus/laravel-ai-chain
+package: nexus/laravel-ai-workflows
 github: https://github.com/mouadh/nexus
 ```
 
@@ -97,7 +97,7 @@ github: https://github.com/mouadh/nexus
 ## Progressive Disclosure Implementation
 
 ✅ **Layer 1: Metadata** (~100 tokens)
-- `name`: "laravel-ai-chain"
+- `name`: "laravel-ai-workflows"
 - `description`: Concise, actionable
 - Loaded at agent startup for all skills
 
@@ -304,7 +304,7 @@ The refactored skill enables:
 
 ## Ready for Production
 
-The `laravel-ai-chain` skill is now:
+The `laravel-ai-workflows` skill is now:
 
 - ✅ **Fully Compliant** with agentskills.io specification
 - ✅ **Well-Organized** with clear structure
@@ -345,7 +345,7 @@ The `laravel-ai-chain` skill is now:
 
 ## Conclusion
 
-The `laravel-ai-chain` skill has been successfully refactored to **100% compliance** with the agentskills.io specification. It follows all required formats, naming conventions, and best practices, making it compatible with any agent system that follows the specification.
+The `laravel-ai-workflows` skill has been successfully refactored to **100% compliance** with the agentskills.io specification. It follows all required formats, naming conventions, and best practices, making it compatible with any agent system that follows the specification.
 
 **Status:** ✅ **PRODUCTION READY**
 

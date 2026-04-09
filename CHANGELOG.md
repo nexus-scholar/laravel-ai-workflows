@@ -1,12 +1,12 @@
 # Changelog
 
-All notable changes to `nexus/laravel-ai-chain` are documented in this file.
+All notable changes to `nexus/laravel-ai-workflows` are documented in this file.
 
 ## [0.1.0] - 2026-04-09
 
 ### Added
 - Chain composition primitives: `Chain`, `SequentialChain`, and `ChainFactory` for fluent composition.
-- Laravel-facing manager/facade entrypoints: `AiChainManager` and `Nexus\AiChain\Facades\AiChain`.
+- Laravel-facing manager/facade entrypoints: `AiChainManager` and `Nexus\\Workflow\Facades\AiChain`.
 - Graph orchestration core: `StateGraph`, `CompiledGraph`, immutable `State`, and `Node` contract.
 - Queue graph runner path: `QueueRunner` + `RunGraphNode` with resolver-based graph reconstruction.
 - Checkpointing via `CacheCheckpoint` and `Checkpointable` contract.

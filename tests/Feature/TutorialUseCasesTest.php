@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 use Laravel\Ai\Ai;
 use Laravel\Ai\AnonymousAgent;
-use Nexus\AiChain\AiChainManager;
-use Nexus\AiChain\Chains\Chain;
-use Nexus\AiChain\Graph\State;
-use Nexus\AiChain\Graph\StateGraph;
-use Nexus\AiChain\Memory\InMemoryConversation;
-use Nexus\AiChain\Prompts\PromptTemplate;
-use Nexus\AiChain\Retrieval\VectorStoreRetriever;
+use Nexus\Workflow\AiChainManager;
+use Nexus\Workflow\Chains\Chain;
+use Nexus\Workflow\Graph\State;
+use Nexus\Workflow\Graph\StateGraph;
+use Nexus\Workflow\Memory\InMemoryConversation;
+use Nexus\Workflow\Prompts\PromptTemplate;
+use Nexus\Workflow\Retrieval\VectorStoreRetriever;
 
 use function Laravel\Ai\agent;
 

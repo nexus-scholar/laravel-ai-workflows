@@ -1,10 +1,10 @@
 <?php
 
-namespace Nexus\AiChain;
+namespace Nexus\Workflow;
 
 use Illuminate\Support\ServiceProvider;
-use Nexus\AiChain\Contracts\Checkpointable;
-use Nexus\AiChain\Graph\Checkpoint\CacheCheckpoint;
+use Nexus\Workflow\Contracts\Checkpointable;
+use Nexus\Workflow\Graph\Checkpoint\CacheCheckpoint;
 
 class AiChainServiceProvider extends ServiceProvider
 {

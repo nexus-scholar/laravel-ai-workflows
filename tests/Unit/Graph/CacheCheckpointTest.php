@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Nexus\AiChain\Tests\Unit\Graph;
+namespace Nexus\Workflow\Tests\Unit\Graph;
 
 use Illuminate\Support\Facades\Cache;
-use Nexus\AiChain\Graph\Checkpoint\CacheCheckpoint;
-use Nexus\AiChain\Graph\State;
-use Nexus\AiChain\Tests\TestCase;
+use Nexus\Workflow\Graph\Checkpoint\CacheCheckpoint;
+use Nexus\Workflow\Graph\State;
+use Nexus\Workflow\Tests\TestCase;
 
 if (! class_exists(CounterState::class)) {
     class CounterState extends State

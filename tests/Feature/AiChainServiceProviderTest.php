@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-use Nexus\AiChain\AiChainServiceProvider;
-use Nexus\AiChain\AiChainManager;
-use Nexus\AiChain\Contracts\Checkpointable;
-use Nexus\AiChain\Graph\Checkpoint\CacheCheckpoint;
+use Nexus\Workflow\AiChainServiceProvider;
+use Nexus\Workflow\AiChainManager;
+use Nexus\Workflow\Contracts\Checkpointable;
+use Nexus\Workflow\Graph\Checkpoint\CacheCheckpoint;
 
 it('merges default package config', function () {
     expect(config('ai-chain.graph.max_iterations'))->toBe(50)
