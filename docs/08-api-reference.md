@@ -86,6 +86,24 @@ foreach ($chain->stream(['input' => 'Hello']) as $token) {
 }
 ```
 
+```php
+streamEvents(array $inputs): iterable
+```
+
+Execute the chain and yield native Laravel AI SDK stream events.
+
+**Parameters:**
+- `$inputs` — Associative array of template variables
+
+**Yields:** SDK stream event objects in order
+
+**Example:**
+```php
+foreach ($chain->streamEvents(['input' => 'Hello']) as $event) {
+    // Inspect event metadata, usage, tool events, etc.
+}
+```
+
 ### Input/Output Inspection
 
 ```php

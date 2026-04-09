@@ -43,10 +43,14 @@ This checklist tracks the Laravel AI SDK adoption roadmap for `laravel-ai-workfl
     - [x] Contract keeps `stream()` backward compatible and reserves rich events for a dedicated API in M1.5-PR2.
   - Acceptance tests:
     - `vendor/bin/pest --configuration=phpunit.xml tests/Unit/Chains/ChainTest.php --filter="streams text deltas from laravel ai stream events"`
-- [ ] M1.5-PR2 (1-2 days): Event-preserving streaming implementation
+- [x] M1.5-PR2 (1-2 days): Event-preserving streaming implementation
   - Scope: expose SDK event metadata stream path.
+  - Progress:
+    - [x] Added `streamEvents(array $inputs): iterable` to chain contract and implementations.
+    - [x] Kept `stream()` behavior backward compatible by extracting text from event stream.
   - Acceptance tests:
-    - Unit tests verify event and text paths.
+    - `vendor/bin/pest --configuration=phpunit.xml tests/Unit/Chains/ChainTest.php --filter="streams text deltas from laravel ai stream events"`
+    - `vendor/bin/pest --configuration=phpunit.xml tests/Unit/Chains/ChainTest.php --filter="streams native laravel ai events via streamEvents"`
 - [ ] M1.5-PR3 (1 day): `ChainTool` provider-tool semantics
   - Scope: clarify pass-through behavior for provider tools.
   - Acceptance tests:

@@ -17,6 +17,13 @@ interface Chain
     public function stream(array $inputs): \Generator;
 
     /**
+     * Stream native Laravel AI SDK events for advanced consumers.
+     *
+     * @return iterable<mixed>
+     */
+    public function streamEvents(array $inputs): iterable;
+
+    /**
      * Get the input key names this chain expects.
      *
      * @return string[]

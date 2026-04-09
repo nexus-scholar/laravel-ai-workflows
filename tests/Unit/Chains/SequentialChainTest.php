@@ -38,6 +38,28 @@ it('streams only the final chain after preparing previous outputs', function () 
     expect(iterator_to_array($chain->stream(['input' => 'q']), false))->toBe(['a', 'b']);
 });
 
+it('streams only the final chain events after preparing previous outputs', function () {
+    $first = Mockery::mock(ChainContract::class);
+    $second = Mockery::mock(ChainContract::class);
+
+    $first->shouldReceive('run')->once()->with(['input' => 'q'])->andReturn('first_result');
+    $first->shouldReceive('outputKey')->andReturn('first');
+
+    $second->shouldReceive('streamEvents')->once()->with(['input' => 'q', 'first' => 'first_result'])
+        ->andReturn((function () {
+            yield (object) ['kind' => 'event_a'];
+            yield (object) ['kind' => 'event_b'];
+        })());
+
+    $chain = new SequentialChain([$first, $second]);
+
+    $events = iterator_to_array($chain->streamEvents(['input' => 'q']), false);
+
+    expect($events)->toHaveCount(2)
+        ->and($events[0]->kind)->toBe('event_a')
+        ->and($events[1]->kind)->toBe('event_b');
+});
+
 it('fails fast on empty chain list', function () {
     expect(fn () => new SequentialChain([]))
         ->toThrow(InvalidArgumentException::class, 'SequentialChain requires at least one chain.');

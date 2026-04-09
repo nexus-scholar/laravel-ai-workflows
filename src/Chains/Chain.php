@@ -5,6 +5,7 @@ namespace Nexus\Workflow\Chains;
 use InvalidArgumentException;
 use Laravel\Ai\Contracts\Agent;
 use Laravel\Ai\Contracts\HasStructuredOutput;
+use Laravel\Ai\Enums\Lab;
 use Nexus\Workflow\Chains\Support\ProviderOptionsAgent;
 use Nexus\Workflow\Chains\Support\StructuredProviderOptionsAgent;
 use Nexus\Workflow\Contracts\Chain as ChainContract;
@@ -44,7 +45,7 @@ final class Chain implements ChainContract
     private array $providerOptions = [];
 
     /**
-     * @var (callable(\Laravel\Ai\Enums\Lab|string, array<string, mixed>, Agent): array<string, mixed>)|null
+     * @var (callable(Lab|string, array<string, mixed>, Agent): array<string, mixed>)|null
      */
     private $providerOptionsResolver = null;
 
@@ -97,7 +98,7 @@ final class Chain implements ChainContract
     }
 
     /**
-     * @param array<int, mixed> $attachments
+     * @param  array<int, mixed>  $attachments
      */
     public function withAttachments(array $attachments): self
     {
@@ -108,7 +109,7 @@ final class Chain implements ChainContract
     }
 
     /**
-     * @param array<string, array<string, mixed>> $providerOptions
+     * @param  array<string, array<string, mixed>>  $providerOptions
      */
     public function withProviderOptions(array $providerOptions): self
     {
@@ -119,7 +120,7 @@ final class Chain implements ChainContract
     }
 
     /**
-     * @param callable(\Laravel\Ai\Enums\Lab|string, array<string, mixed>, Agent): array<string, mixed> $resolver
+     * @param  callable(Lab|string, array<string, mixed>, Agent): array<string, mixed>  $resolver
      */
     public function withProviderOptionsResolver(callable $resolver): self
     {
@@ -168,11 +169,7 @@ final class Chain implements ChainContract
 
     public function stream(array $inputs): \Generator
     {
-        $agent = $this->resolveAgent();
-        $augmented = $this->augmentInputs($inputs);
-        $prompt = $this->promptTemplate->format($augmented);
-
-        foreach ($this->invokeAgentStream($agent, $prompt) as $event) {
+        foreach ($this->streamEvents($inputs) as $event) {
             if (is_object($event) && method_exists($event, 'text')) {
                 yield (string) $event->text();
 
@@ -189,6 +186,15 @@ final class Chain implements ChainContract
                 yield (string) $event;
             }
         }
+    }
+
+    public function streamEvents(array $inputs): iterable
+    {
+        $agent = $this->resolveAgent();
+        $augmented = $this->augmentInputs($inputs);
+        $prompt = $this->promptTemplate->format($augmented);
+
+        return $this->invokeAgentStream($agent, $prompt);
     }
 
     public function inputKeys(): array

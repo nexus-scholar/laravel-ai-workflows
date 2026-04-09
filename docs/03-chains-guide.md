@@ -270,6 +270,16 @@ foreach ($chain->stream(['input' => 'Hello']) as $token) {
 }
 ```
 
+### Streaming Native SDK Events
+
+Use `streamEvents()` when you need provider/usage/tool metadata in addition to text deltas.
+
+```php
+foreach ($chain->streamEvents(['input' => 'Hello']) as $event) {
+    // Handle SDK event objects directly.
+}
+```
+
 ### In a Blade Template
 
 ```blade

@@ -68,6 +68,21 @@ it('streams text deltas from laravel ai stream events', function () {
         ->toContain('world');
 });
 
+it('streams native laravel ai events via streamEvents', function () {
+    Ai::fakeAgent(AnonymousAgent::class, ['hello streaming world']);
+
+    $chain = Chain::make(
+        agent(),
+        PromptTemplate::from('Stream events: {input}')
+    );
+
+    $events = iterator_to_array($chain->streamEvents(['input' => 'go']), false);
+
+    expect($events)->not->toBeEmpty()
+        ->and($events[0])->toBeInstanceOf(\Laravel\Ai\Streaming\Events\StreamStart::class)
+        ->and(array_filter($events, fn ($event) => $event instanceof \Laravel\Ai\Streaming\Events\TextDelta))->not->toBeEmpty();
+});
+
 it('stores prompt and response in memory', function () {
     Ai::fakeAgent(AnonymousAgent::class, ['Saved']);
 

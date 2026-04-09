@@ -65,6 +65,19 @@ final class SequentialChain implements ChainContract
         yield from $last->stream($state);
     }
 
+    public function streamEvents(array $inputs): iterable
+    {
+        $state = $inputs;
+        $chains = $this->chains;
+        $last = array_pop($chains);
+
+        foreach ($chains as $chain) {
+            $state[$chain->outputKey()] = $chain->run($state);
+        }
+
+        return $last->streamEvents($state);
+    }
+
     public function inputKeys(): array
     {
         return $this->firstChain()->inputKeys();
