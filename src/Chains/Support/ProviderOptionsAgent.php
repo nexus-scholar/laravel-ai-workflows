@@ -62,6 +62,9 @@ class ProviderOptionsAgent implements Agent, Conversational, HasMiddleware, HasP
         return $this->agent->tools();
     }
 
+    /**
+     * @return array<int, mixed>
+     */
     public function middleware(): array
     {
         if (! $this->agent instanceof HasMiddleware) {
@@ -90,9 +93,6 @@ class ProviderOptionsAgent implements Agent, Conversational, HasMiddleware, HasP
         if ($this->providerOptionsResolver !== null) {
             $resolved = ($this->providerOptionsResolver)($provider, $options, $this->agent);
 
-            if (! is_array($resolved)) {
-                throw new \InvalidArgumentException('Provider options resolver must return an array.');
-            }
 
             $options = array_replace($options, $resolved);
         }

@@ -188,6 +188,10 @@ final class Chain implements ChainContract
         }
     }
 
+    /**
+     * @param array<string, mixed> $inputs
+     * @return iterable<int|string, mixed>
+     */
     public function streamEvents(array $inputs): iterable
     {
         $agent = $this->resolveAgent();
@@ -304,6 +308,9 @@ final class Chain implements ChainContract
         return $agent->prompt(...$args);
     }
 
+    /**
+     * @return iterable<int|string, mixed>
+     */
     private function invokeAgentStream(Agent $agent, string $prompt): iterable
     {
         $args = [$prompt, $this->attachments, $this->provider, $this->model];

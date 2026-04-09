@@ -65,6 +65,10 @@ final class SequentialChain implements ChainContract
         yield from $last->stream($state);
     }
 
+    /**
+     * @param array<string, mixed> $inputs
+     * @return iterable<int|string, mixed>
+     */
     public function streamEvents(array $inputs): iterable
     {
         $state = $inputs;
