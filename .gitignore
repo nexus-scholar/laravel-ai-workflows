@@ -1,6 +1,5 @@
 /vendor/
 .env
 .phpunit.cache/
-/phpunit.xml
 /tests/Pest.php
 /tests/TestCase.php
