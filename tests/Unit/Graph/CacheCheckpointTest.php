@@ -6,25 +6,8 @@ namespace Nexus\Workflow\Tests\Unit\Graph;
 
 use Illuminate\Support\Facades\Cache;
 use Nexus\Workflow\Graph\Checkpoint\CacheCheckpoint;
-use Nexus\Workflow\Graph\State;
 use Nexus\Workflow\Tests\TestCase;
 
-if (! class_exists(CounterState::class)) {
-    class CounterState extends State
-    {
-        public function __construct(public int $count = 0) {}
-
-        public function toArray(): array
-        {
-            return ['count' => $this->count];
-        }
-
-        public static function fromArray(array $data): static
-        {
-            return new self($data['count']);
-        }
-    }
-}
 
 class CacheCheckpointTest extends TestCase
 {

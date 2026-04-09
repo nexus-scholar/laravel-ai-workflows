@@ -6,28 +6,11 @@ namespace Nexus\Workflow\Tests\Unit\Graph;
 
 use Illuminate\Support\Facades\Bus;
 use Nexus\Workflow\Graph\Runners\QueueRunner;
-use Nexus\Workflow\Graph\State;
 use Nexus\Workflow\Graph\StateGraph;
 use Nexus\Workflow\Jobs\RunGraphNode;
 use Nexus\Workflow\Tests\TestCase;
 use RuntimeException;
 
-if (! class_exists(CounterState::class)) {
-    class CounterState extends State
-    {
-        public function __construct(public int $count = 0) {}
-
-        public function toArray(): array
-        {
-            return ['count' => $this->count];
-        }
-
-        public static function fromArray(array $data): static
-        {
-            return new self($data['count']);
-        }
-    }
-}
 
 class QueueRunnerTest extends TestCase
 {

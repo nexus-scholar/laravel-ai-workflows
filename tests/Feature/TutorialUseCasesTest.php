@@ -6,33 +6,14 @@ use Laravel\Ai\Ai;
 use Laravel\Ai\AnonymousAgent;
 use Nexus\Workflow\AiChainManager;
 use Nexus\Workflow\Chains\Chain;
-use Nexus\Workflow\Graph\State;
 use Nexus\Workflow\Graph\StateGraph;
 use Nexus\Workflow\Memory\InMemoryConversation;
 use Nexus\Workflow\Prompts\PromptTemplate;
 use Nexus\Workflow\Retrieval\VectorStoreRetriever;
+use Nexus\Workflow\Tests\Feature\UseCaseState;
 
 use function Laravel\Ai\agent;
 
-if (! class_exists(UseCaseState::class)) {
-    final class UseCaseState extends State
-    {
-        public function __construct(public int $count = 0, public array $events = []) {}
-
-        public function toArray(): array
-        {
-            return ['count' => $this->count, 'events' => $this->events];
-        }
-
-        public static function fromArray(array $data): static
-        {
-            return new self(
-                count: $data['count'] ?? 0,
-                events: $data['events'] ?? [],
-            );
-        }
-    }
-}
 
 it('supports tutorial use case: single chain', function () {
     Ai::fakeAgent(AnonymousAgent::class, ['Concise answer']);
