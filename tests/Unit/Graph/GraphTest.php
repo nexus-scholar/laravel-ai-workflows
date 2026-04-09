@@ -104,3 +104,19 @@ it('fails when a conditional edge resolves to an unknown node', function () {
         ->toThrow(RuntimeException::class, "Conditional edge from 'start' routed to unknown node 'ghost'.");
 });
 
+it('uses the same max-iteration error message for invoke and stream', function () {
+    $graph = new StateGraph;
+    $graph->addNode('loop', fn (CounterState $s) => $s->with(['count' => $s->count + 1]));
+    $graph->setEntryPoint('loop');
+    $graph->addConditionalEdge('loop', fn () => 'loop');
+
+    $compiled = $graph->compile()->withMaxIterations(2);
+    $expectedMessage = 'Max iterations (2) reached in graph execution.';
+
+    expect(fn () => $compiled->invoke(new CounterState(0)))
+        ->toThrow(RuntimeException::class, $expectedMessage);
+
+    expect(fn () => iterator_to_array($compiled->stream(new CounterState(0))))
+        ->toThrow(RuntimeException::class, $expectedMessage);
+});
+

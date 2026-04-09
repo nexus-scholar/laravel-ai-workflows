@@ -48,7 +48,7 @@ final class CompiledGraph
 
         while ($currentNode !== StateGraph::END) {
             if ($iterations >= $this->maxIterations) {
-                throw new RuntimeException("Max iterations ({$this->maxIterations}) reached in graph execution.");
+                throw new RuntimeException($this->maxIterationsReachedMessage());
             }
 
             $state = $this->executeNode($currentNode, $state);
@@ -72,7 +72,7 @@ final class CompiledGraph
 
         while ($currentNode !== StateGraph::END) {
             if ($iterations >= $this->maxIterations) {
-                throw new RuntimeException('Max iterations reached.');
+                throw new RuntimeException($this->maxIterationsReachedMessage());
             }
 
             $state = $this->executeNode($currentNode, $state);
@@ -185,5 +185,10 @@ final class CompiledGraph
         }
 
         return array_values(array_unique($issues));
+    }
+
+    private function maxIterationsReachedMessage(): string
+    {
+        return "Max iterations ({$this->maxIterations}) reached in graph execution.";
     }
 }

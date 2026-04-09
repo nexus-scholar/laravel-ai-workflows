@@ -2,11 +2,13 @@
 
 namespace Nexus\Workflow\Chains;
 
+use InvalidArgumentException;
 use Laravel\Ai\Contracts\Agent;
 use Nexus\Workflow\Contracts\Chain as ChainContract;
 use Nexus\Workflow\Contracts\Memory;
 use Nexus\Workflow\Contracts\Retriever;
 use Nexus\Workflow\Prompts\PromptTemplate;
+use Stringable;
 
 final class Chain implements ChainContract
 {
@@ -149,8 +151,8 @@ final class Chain implements ChainContract
     private function augmentInputs(array $inputs): array
     {
         if ($this->retriever !== null) {
-            $query = $this->extractPrimaryInput($inputs);
-            $docs = $this->retriever->retrieve((string) $query, $this->topK);
+            $query = $this->extractPrimaryInput($inputs, requireInputKey: true);
+            $docs = $this->retriever->retrieve($query, $this->topK);
             $inputs['context'] = implode("\n\n", array_map(fn ($d) => $d->content, $docs));
         }
 
@@ -161,15 +163,33 @@ final class Chain implements ChainContract
         return $inputs;
     }
 
-    private function extractPrimaryInput(array $inputs): string
+    private function extractPrimaryInput(array $inputs, bool $requireInputKey = false): string
     {
-        if (isset($inputs['input'])) {
-            return (string) $inputs['input'];
+        if (array_key_exists('input', $inputs)) {
+            return $this->stringifyInputValue($inputs['input'], 'input');
         }
 
-        $firstValue = array_values($inputs)[0] ?? '';
+        if ($requireInputKey) {
+            throw new InvalidArgumentException("Retriever-enabled chains require an 'input' key.");
+        }
 
-        return (string) $firstValue;
+        if ($inputs === []) {
+            return '';
+        }
+
+        $firstKey = array_key_first($inputs);
+        $firstValue = $inputs[$firstKey];
+
+        return $this->stringifyInputValue($firstValue, (string) $firstKey);
+    }
+
+    private function stringifyInputValue(mixed $value, string $sourceKey): string
+    {
+        if (is_scalar($value) || $value instanceof Stringable) {
+            return (string) $value;
+        }
+
+        throw new InvalidArgumentException("Input value for key '{$sourceKey}' must be scalar or Stringable.");
     }
 
     private function extractResponseText(mixed $response): string

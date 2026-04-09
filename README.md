@@ -1,6 +1,6 @@
 # Laravel AI Workflows
 
-<div align="center">
+<div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: center;">
 
 ![PHP](https://img.shields.io/badge/PHP-8.3+-777BB4?style=flat-square)
 ![Laravel](https://img.shields.io/badge/Laravel-12.0%20%7C%2013.0-FF2D20?style=flat-square)
@@ -83,7 +83,7 @@ See [Core Concepts](./docs/02-core-concepts.md) for detailed explanations.
 - **[Advanced Patterns](./docs/07-advanced-patterns.md)** — Queues, checkpointing, monitoring
 - **[API Reference](./docs/08-api-reference.md)** — Complete API
 
-**[6 Progressive Tutorials](./docs/tutorials/)** — From simple chains to production RAG systems
+**[6 Progressive Tutorials](./docs/tutorials/README.md)** — From simple chains to production RAG systems
 
 ---
 
@@ -100,7 +100,7 @@ php examples/05-manager-and-factory.php
 php examples/fluent-chain-factory.php
 ```
 
-See [examples/](./examples/) directory.
+See [examples/](./examples/README.md) directory.
 
 ---
 
@@ -132,8 +132,8 @@ MIT — See [LICENSE](./LICENSE).
 
 ---
 
-<div align="center">
+<div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: center; margin-top: 24px;">
 
-[📖 Documentation](./docs/README.md) • [💡 Examples](./examples/) • [🤝 Contribute](./CONTRIBUTING.md)
+[📖 Documentation](./docs/README.md) • [💡 Examples](./examples/README.md) • [🤝 Contribute](./CONTRIBUTING.md)
 
 </div>

@@ -6,6 +6,7 @@ use Laravel\Ai\Ai;
 use Laravel\Ai\AnonymousAgent;
 use Laravel\Ai\StructuredAnonymousAgent;
 use Nexus\Workflow\Chains\Chain;
+use Nexus\Workflow\Contracts\Retriever;
 use Nexus\Workflow\Memory\InMemoryConversation;
 use Nexus\Workflow\Prompts\PromptTemplate;
 
@@ -97,4 +98,30 @@ it('passes custom model override to laravel ai', function () {
 
     Ai::assertAgentWasPrompted(AnonymousAgent::class, fn ($prompt) => $prompt->model === 'gpt-4o-mini'
     );
+});
+
+it('throws when retriever is configured without an explicit input key', function () {
+    $retriever = Mockery::mock(Retriever::class);
+    $retriever->shouldNotReceive('retrieve');
+
+    $chain = Chain::make(
+        agent(),
+        PromptTemplate::from('Context: {context}')
+    )->withRetriever($retriever);
+
+    expect(fn () => $chain->run(['topic' => 'graph orchestration']))
+        ->toThrow(InvalidArgumentException::class, "Retriever-enabled chains require an 'input' key.");
+});
+
+it('throws when input key contains a non scalar value', function () {
+    $retriever = Mockery::mock(Retriever::class);
+    $retriever->shouldNotReceive('retrieve');
+
+    $chain = Chain::make(
+        agent(),
+        PromptTemplate::from('Context: {context}')
+    )->withRetriever($retriever);
+
+    expect(fn () => $chain->run(['input' => ['nested']]))
+        ->toThrow(InvalidArgumentException::class, "Input value for key 'input' must be scalar or Stringable.");
 });
