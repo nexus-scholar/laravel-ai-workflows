@@ -4,6 +4,7 @@
 
 ![PHP](https://img.shields.io/badge/PHP-8.3+-777BB4?style=flat-square)
 ![Laravel](https://img.shields.io/badge/Laravel-12.0%20%7C%2013.0-FF2D20?style=flat-square)
+[![Tests](https://github.com/nexus-scholar/laravel-ai-workflows/actions/workflows/tests.yml/badge.svg)](https://github.com/nexus-scholar/laravel-ai-workflows/actions/workflows/tests.yml)
 ![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
 
 **Orchestration framework for `laravel/ai`**
