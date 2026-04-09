@@ -334,6 +334,12 @@ $chain = Chain::make($agent, PromptTemplate::from('Q: {input}'))
 
 Provider option precedence is: agent-defined options -> `*` wildcard -> provider-specific options -> resolver output.
 
+### Provider Tools vs ChainTool
+
+- Provider tools (for example SDK `WebSearch` / `FileSearch`) are declared on agents and executed by the provider runtime.
+- `Nexus\\Workflow\\Tools\\ChainTool` executes local chain orchestration by calling `$chain->run(...)`.
+- This package does not locally execute provider tools inside the chain layer; it only forwards declarations through agent contracts.
+
 ### Using Config Defaults
 
 ```php

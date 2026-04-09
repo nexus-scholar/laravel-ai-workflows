@@ -3,7 +3,11 @@
 declare(strict_types=1);
 
 use Illuminate\JsonSchema\JsonSchemaTypeFactory;
+use Illuminate\JsonSchema\Types\Type;
+use Laravel\Ai\Contracts\HasTools;
 use Laravel\Ai\Contracts\HasProviderOptions;
+use Laravel\Ai\Contracts\Tool;
+use Laravel\Ai\Tools\Request;
 use Nexus\Workflow\Chains\Support\ProviderOptionsAgent;
 use Nexus\Workflow\Chains\Support\StructuredProviderOptionsAgent;
 
@@ -64,5 +68,52 @@ it('delegates structured schema in structured wrapper', function () {
     $schema = $agent->schema(new JsonSchemaTypeFactory);
 
     expect($schema)->toHaveKey('summary');
+});
+
+it('forwards tool declarations from the inner agent', function () {
+    $tool = new class implements Tool
+    {
+        public bool $invoked = false;
+
+        public function description(): string
+        {
+            return 'demo';
+        }
+
+        public function handle(Request $request): string
+        {
+            $this->invoked = true;
+
+            return 'ok';
+        }
+
+        /**
+         * @return array<string, Type>
+         */
+        public function schema(\Illuminate\Contracts\JsonSchema\JsonSchema $schema): array
+        {
+            return ['input' => $schema->string()->required()];
+        }
+    };
+
+    $inner = new class ($tool) extends \Laravel\Ai\AnonymousAgent implements HasTools
+    {
+        public function __construct(private readonly Tool $tool)
+        {
+            parent::__construct('instructions', [], []);
+        }
+
+        public function tools(): iterable
+        {
+            return [$this->tool];
+        }
+    };
+
+    $agent = new ProviderOptionsAgent($inner);
+    $tools = iterator_to_array($agent->tools());
+
+    expect($tools)->toHaveCount(1)
+        ->and($tools[0])->toBe($tool)
+        ->and($tool->invoked)->toBeFalse();
 });
 

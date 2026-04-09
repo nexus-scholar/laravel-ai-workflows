@@ -258,6 +258,11 @@ Define a runtime resolver that can compute or override provider options.
 
 Provider options precedence is: agent-defined options -> wildcard map (`*`) -> provider-specific map -> resolver output.
 
+Provider tool semantics:
+
+- SDK provider tools are declaration pass-through and execute in `laravel/ai` provider pipelines.
+- `ChainTool` remains a local wrapper over `Chain::run(...)` and is not a provider-tool runtime.
+
 ---
 
 ## ChainFactory

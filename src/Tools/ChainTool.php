@@ -22,6 +22,8 @@ final readonly class ChainTool implements Tool
 
     public function handle(Request $request): string
     {
+        // ChainTool executes local chain orchestration only.
+        // Provider tools (WebSearch, FileSearch, etc.) are declared on the agent and executed by laravel/ai providers.
         $result = $this->chain->run($request->all());
 
         return is_array($result) ? json_encode($result) : (string) $result;

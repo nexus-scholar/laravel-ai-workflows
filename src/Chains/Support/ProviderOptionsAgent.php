@@ -59,6 +59,7 @@ class ProviderOptionsAgent implements Agent, Conversational, HasMiddleware, HasP
             return [];
         }
 
+        // Tools are forwarded as provider declarations; invocation remains inside laravel/ai provider execution.
         return $this->agent->tools();
     }
 

@@ -39,4 +39,18 @@ class ChainToolTest extends TestCase
         expect($schema)->toHaveKeys(['foo', 'bar']);
         expect($schema['foo']->toArray()['type'])->toBe('string');
     }
+
+    public function test_it_serializes_array_results_as_json()
+    {
+        $chain = Mockery::mock(Chain::class);
+        $chain->shouldReceive('run')->once()->with(['input' => 'test'])->andReturn(['ok' => true, 'count' => 2]);
+        $chain->shouldReceive('inputKeys')->andReturn(['input']);
+
+        $tool = new ChainTool($chain, 'my_tool', 'description');
+
+        $request = new Request(['input' => 'test']);
+        $result = $tool->handle($request);
+
+        expect((string) $result)->toBe('{"ok":true,"count":2}');
+    }
 }

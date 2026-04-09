@@ -51,10 +51,14 @@ This checklist tracks the Laravel AI SDK adoption roadmap for `laravel-ai-workfl
   - Acceptance tests:
     - `vendor/bin/pest --configuration=phpunit.xml tests/Unit/Chains/ChainTest.php --filter="streams text deltas from laravel ai stream events"`
     - `vendor/bin/pest --configuration=phpunit.xml tests/Unit/Chains/ChainTest.php --filter="streams native laravel ai events via streamEvents"`
-- [ ] M1.5-PR3 (1 day): `ChainTool` provider-tool semantics
+- [x] M1.5-PR3 (1 day): `ChainTool` provider-tool semantics
   - Scope: clarify pass-through behavior for provider tools.
+  - Progress:
+    - [x] Added explicit boundary notes in `ChainTool` and provider-options wrapper tool forwarding.
+    - [x] Added tests for JSON serialization and tool-declaration forwarding semantics.
   - Acceptance tests:
-    - Tool tests cover schema + forwarding behavior.
+    - `vendor/bin/pest --configuration=phpunit.xml tests/Unit/Tools/ChainToolTest.php`
+    - `vendor/bin/pest --configuration=phpunit.xml tests/Unit/Chains/ProviderOptionsAgentTest.php`
 
 ## M2 - Graph Runtime Alignment
 
