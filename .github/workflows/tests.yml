@@ -4,10 +4,19 @@ on:
   push:
     branches: ["main", "master"]
   pull_request:
+  workflow_dispatch:
+    inputs:
+      autoload_sanity:
+        description: "Run strict PSR-4 autoload sanity checks"
+        required: false
+        default: "false"
 
 jobs:
   quality:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: laravel-ai-chain
     strategy:
       fail-fast: false
       matrix:
@@ -28,7 +37,13 @@ jobs:
         run: composer validate --strict
 
       - name: Install dependencies
-        run: composer install --no-interaction --prefer-dist --no-progress
+        run: composer install --no-interaction --no-progress --prefer-dist --optimize-autoloader
+
+      - name: Autoload sanity check (optional)
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.autoload_sanity == 'true' }}
+        run: |
+          composer dump-autoload --optimize --strict-psr
+          php -r "require 'vendor/autoload.php'; exit(class_exists('Nexus\\Workflow\\AiChainServiceProvider') ? 0 : 1);"
 
       - name: Run tests
         run: composer test
