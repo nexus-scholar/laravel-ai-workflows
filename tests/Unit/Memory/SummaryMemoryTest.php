@@ -38,3 +38,35 @@ it('preserves recent messages after summarization', function () {
     expect($memory->asString())->toContain('SUMMARY OF EARLIER CONVERSATION:');
     expect($memory->asString())->toContain('H: 3');
 });
+
+it('does not drop messages when summarizer throws', function () {
+    $summarizer = function () {
+        throw new RuntimeException('summary failed');
+    };
+
+    $memory = new SummaryMemory($summarizer, summarizeAfter: 2);
+    $memory->add('h', '1');
+    $memory->add('a', '2');
+
+    expect($memory->messages())->toHaveCount(2);
+    expect($memory->asString())->toContain('H: 1');
+});
+
+it('does not drop messages when summarizer returns empty text', function () {
+    $memory = new SummaryMemory(fn () => '   ', summarizeAfter: 2);
+
+    $memory->add('h', '1');
+    $memory->add('a', '2');
+
+    expect($memory->messages())->toHaveCount(2);
+    expect($memory->asString())->not->toContain('SUMMARY OF EARLIER CONVERSATION:');
+});
+
+it('validates constructor arguments', function () {
+    expect(fn () => new SummaryMemory('not_callable', summarizeAfter: 2))
+        ->toThrow(InvalidArgumentException::class);
+
+    expect(fn () => new SummaryMemory(fn () => 'ok', summarizeAfter: 1))
+        ->toThrow(InvalidArgumentException::class);
+});
+

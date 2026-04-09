@@ -29,3 +29,23 @@ it('fuses results using RRF', function () {
     expect($results[0]->content)->toBe('B');
     expect($results)->toHaveCount(3);
 });
+
+it('ignores empty-content documents and handles non-positive topK', function () {
+    $vector = Mockery::mock(Retriever::class);
+    $keyword = Mockery::mock(Retriever::class);
+
+    $vector->shouldReceive('retrieve')->andReturn([
+        new Document(''),
+        new Document('A'),
+    ]);
+    $keyword->shouldReceive('retrieve')->andReturn([
+        new Document('  '),
+        new Document('B'),
+    ]);
+
+    $hybrid = new HybridRetriever($vector, $keyword, k: 60);
+
+    expect($hybrid->retrieve('query', 2))->toHaveCount(2);
+    expect($hybrid->retrieve('query', 0))->toBe([]);
+});
+

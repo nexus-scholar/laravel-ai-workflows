@@ -39,4 +39,23 @@ class RerankingRetrieverTest extends TestCase
         expect($results[0]->score)->toBe(0.95);
         expect($results[0]->metadata)->toBe(['id' => 2]);
     }
+
+    public function test_it_returns_empty_for_non_positive_top_k(): void
+    {
+        $base = Mockery::mock(Retriever::class);
+        $base->shouldNotReceive('retrieve');
+
+        $retriever = new RerankingRetriever($base);
+
+        expect($retriever->retrieve('query', 0))->toBe([]);
+    }
+
+    public function test_it_validates_fetch_k(): void
+    {
+        $base = Mockery::mock(Retriever::class);
+
+        $this->expectException(\InvalidArgumentException::class);
+
+        new RerankingRetriever($base, fetchK: 0);
+    }
 }

@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Nexus\AiChain\Tests\Unit\Graph;
 
+use Nexus\AiChain\Graph\Exceptions\GraphValidationException;
 use Nexus\AiChain\Graph\State;
 use Nexus\AiChain\Graph\StateGraph;
+use RuntimeException;
 
 if (! class_exists(CounterState::class)) {
     class CounterState extends State
@@ -77,3 +79,45 @@ it('streams graph execution', function () {
         ->and($steps['step1']->count)->toBe(1)
         ->and($steps['step2']->count)->toBe(2);
 });
+
+it('fails when compiling with an unknown edge destination', function () {
+    $graph = new StateGraph;
+    $graph->addNode('start', fn (CounterState $s) => $s);
+    $graph->setEntryPoint('start');
+    $graph->addEdge('start', 'missing_node');
+
+    expect(fn () => $graph->compile())
+        ->toThrow(GraphValidationException::class, "Edge points to non-existent node 'missing_node'.");
+});
+
+it('fails when entry point is empty', function () {
+    $graph = new StateGraph;
+
+    expect(fn () => $graph->setEntryPoint(''))
+        ->toThrow(GraphValidationException::class, 'Entry point cannot be empty.');
+});
+
+it('fails when a node returns a non state value', function () {
+    $graph = new StateGraph;
+    $graph->addNode('bad', fn (CounterState $s) => 'invalid');
+    $graph->setEntryPoint('bad');
+    $graph->addEdge('bad', StateGraph::END);
+
+    $compiled = $graph->compile();
+
+    expect(fn () => $compiled->invoke(new CounterState(0)))
+        ->toThrow(RuntimeException::class, "Node 'bad' must return an instance of Nexus\\AiChain\\Graph\\State.");
+});
+
+it('fails when a conditional edge resolves to an unknown node', function () {
+    $graph = new StateGraph;
+    $graph->addNode('start', fn (CounterState $s) => $s);
+    $graph->setEntryPoint('start');
+    $graph->addConditionalEdge('start', fn (CounterState $s) => 'ghost');
+
+    $compiled = $graph->compile();
+
+    expect(fn () => $compiled->invoke(new CounterState(0)))
+        ->toThrow(RuntimeException::class, "Conditional edge from 'start' routed to unknown node 'ghost'.");
+});
+

@@ -3,16 +3,34 @@
 namespace Nexus\AiChain;
 
 use Illuminate\Support\ServiceProvider;
+use Nexus\AiChain\Contracts\Checkpointable;
+use Nexus\AiChain\Graph\Checkpoint\CacheCheckpoint;
 
 class AiChainServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        // Merge config if exists
+        $this->mergeConfigFrom(
+            __DIR__.'/../config/ai-chain.php',
+            'ai-chain'
+        );
+
+        $this->app->singleton(CacheCheckpoint::class, function (): CacheCheckpoint {
+            return new CacheCheckpoint(
+                store: (string) config('ai-chain.graph.checkpoint.store', 'file'),
+                ttl: (int) config('ai-chain.graph.checkpoint.ttl', 86400),
+            );
+        });
+
+        $this->app->singleton(AiChainManager::class, fn (): AiChainManager => new AiChainManager);
+
+        $this->app->bind(Checkpointable::class, CacheCheckpoint::class);
     }
 
     public function boot(): void
     {
-        // Publish config/migrations if needed
+        $this->publishes([
+            __DIR__.'/../config/ai-chain.php' => config_path('ai-chain.php'),
+        ], 'ai-chain-config');
     }
 }

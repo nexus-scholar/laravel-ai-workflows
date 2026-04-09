@@ -16,12 +16,12 @@ final readonly class ChainTool implements Tool
         private string $description,
     ) {}
 
-    public function description(): Stringable|string
+    public function description(): string
     {
         return $this->description;
     }
 
-    public function handle(Request $request): Stringable|string
+    public function handle(Request $request): string
     {
         $result = $this->chain->run($request->all());
 

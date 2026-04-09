@@ -2,6 +2,7 @@
 
 namespace Nexus\AiChain\Chains;
 
+use Laravel\Ai\Contracts\Agent;
 use Nexus\AiChain\Contracts\Chain as ChainContract;
 use Nexus\AiChain\Contracts\Memory;
 use Nexus\AiChain\Contracts\Retriever;
@@ -15,18 +16,48 @@ final class Chain implements ChainContract
 
     private int $topK = 5;
 
+    private string|array|null $provider = null;
+
+    private ?string $model = null;
+
     private function __construct(
-        private readonly object $agent,
+        private readonly Agent $agent,
         private readonly PromptTemplate $promptTemplate,
         private readonly string $outputKey = 'output',
     ) {}
 
     public static function make(
-        object $agent,
+        Agent $agent,
         PromptTemplate $promptTemplate,
         string $outputKey = 'output',
     ): self {
         return new self($agent, $promptTemplate, $outputKey);
+    }
+
+    public static function compose(Agent $agent, PromptTemplate $promptTemplate, string $outputKey = 'output'): ChainFactory
+    {
+        return ChainFactory::chain($agent, $promptTemplate, $outputKey);
+    }
+
+    public function then(ChainContract $chain): SequentialChain
+    {
+        return new SequentialChain([$this, $chain]);
+    }
+
+    public function withProvider(string|array|null $provider): self
+    {
+        $clone = clone $this;
+        $clone->provider = $provider;
+
+        return $clone;
+    }
+
+    public function withModel(?string $model): self
+    {
+        $clone = clone $this;
+        $clone->model = $model;
+
+        return $clone;
     }
 
     public function withMemory(Memory $memory): self
@@ -51,10 +82,14 @@ final class Chain implements ChainContract
         $augmented = $this->augmentInputs($inputs);
         $prompt = $this->promptTemplate->format($augmented);
 
-        $response = $this->agent->prompt($prompt);
-        $raw = $response->text();
+        $response = $this->agent->prompt(
+            prompt: $prompt,
+            provider: $this->provider,
+            model: $this->model,
+        );
+        $raw = $this->extractResponseText($response);
 
-        $this->memory?->add('human', (string) ($inputs['input'] ?? array_values($inputs)[0]));
+        $this->memory?->add('human', $this->extractPrimaryInput($inputs));
         $this->memory?->add('ai', $raw);
 
         // Native structured output via laravel/ai
@@ -70,8 +105,26 @@ final class Chain implements ChainContract
         $augmented = $this->augmentInputs($inputs);
         $prompt = $this->promptTemplate->format($augmented);
 
-        foreach ($this->agent->stream($prompt) as $chunk) {
-            yield $chunk->text();
+        foreach ($this->agent->stream(
+            prompt: $prompt,
+            provider: $this->provider,
+            model: $this->model,
+        ) as $event) {
+            if (is_object($event) && method_exists($event, 'text')) {
+                yield (string) $event->text();
+
+                continue;
+            }
+
+            if (is_object($event) && isset($event->delta) && is_string($event->delta)) {
+                yield $event->delta;
+
+                continue;
+            }
+
+            if (is_string($event)) {
+                yield (string) $event;
+            }
         }
     }
 
@@ -96,7 +149,7 @@ final class Chain implements ChainContract
     private function augmentInputs(array $inputs): array
     {
         if ($this->retriever !== null) {
-            $query = $inputs['input'] ?? array_values($inputs)[0];
+            $query = $this->extractPrimaryInput($inputs);
             $docs = $this->retriever->retrieve((string) $query, $this->topK);
             $inputs['context'] = implode("\n\n", array_map(fn ($d) => $d->content, $docs));
         }
@@ -106,5 +159,29 @@ final class Chain implements ChainContract
         }
 
         return $inputs;
+    }
+
+    private function extractPrimaryInput(array $inputs): string
+    {
+        if (isset($inputs['input'])) {
+            return (string) $inputs['input'];
+        }
+
+        $firstValue = array_values($inputs)[0] ?? '';
+
+        return (string) $firstValue;
+    }
+
+    private function extractResponseText(mixed $response): string
+    {
+        if (is_object($response) && isset($response->text) && is_string($response->text)) {
+            return $response->text;
+        }
+
+        if (is_object($response) && method_exists($response, 'text')) {
+            return (string) $response->text();
+        }
+
+        return (string) $response;
     }
 }

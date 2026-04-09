@@ -3,6 +3,7 @@
 namespace Nexus\AiChain\Memory;
 
 use Illuminate\Support\Facades\Cache;
+use InvalidArgumentException;
 use Nexus\AiChain\Contracts\Memory;
 
 final class CacheConversationMemory implements Memory
@@ -15,8 +16,18 @@ final class CacheConversationMemory implements Memory
         private readonly string $store = 'file', // Default to file for broader compatibility
         private readonly int $ttl = 3600,
     ) {
-        $this->messages = Cache::store($this->store)
+        if ($this->maxMessages <= 0) {
+            throw new InvalidArgumentException('maxMessages must be greater than 0.');
+        }
+
+        $cached = Cache::store($this->store)
             ->get("ai_memory:{$this->sessionId}", []);
+
+        $this->messages = $this->normalizeMessages($cached);
+
+        if (count($this->messages) > $this->maxMessages) {
+            $this->messages = array_slice($this->messages, -$this->maxMessages);
+        }
     }
 
     public function add(string $role, string $content): void
@@ -28,8 +39,15 @@ final class CacheConversationMemory implements Memory
             $this->messages = array_slice($this->messages, -$this->maxMessages);
         }
 
-        Cache::store($this->store)
-            ->put("ai_memory:{$this->sessionId}", $this->messages, $this->ttl);
+        $store = Cache::store($this->store);
+
+        if ($this->ttl <= 0) {
+            $store->forever("ai_memory:{$this->sessionId}", $this->messages);
+
+            return;
+        }
+
+        $store->put("ai_memory:{$this->sessionId}", $this->messages, $this->ttl);
     }
 
     public function messages(): array
@@ -49,5 +67,23 @@ final class CacheConversationMemory implements Memory
             fn ($m) => strtoupper($m['role']).': '.$m['content'],
             $this->messages
         ));
+    }
+
+    private function normalizeMessages(mixed $raw): array
+    {
+        if (! is_array($raw)) {
+            return [];
+        }
+
+        return array_values(array_filter(array_map(function (mixed $item): ?array {
+            if (! is_array($item) || ! isset($item['role'], $item['content'])) {
+                return null;
+            }
+
+            return [
+                'role' => (string) $item['role'],
+                'content' => (string) $item['content'],
+            ];
+        }, $raw)));
     }
 }

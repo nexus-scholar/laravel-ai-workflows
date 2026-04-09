@@ -2,6 +2,7 @@
 
 namespace Nexus\AiChain\Chains;
 
+use InvalidArgumentException;
 use Nexus\AiChain\Contracts\Chain as ChainContract;
 
 /**
@@ -11,7 +12,32 @@ use Nexus\AiChain\Contracts\Chain as ChainContract;
 final class SequentialChain implements ChainContract
 {
     /** @param ChainContract[] $chains */
-    public function __construct(private readonly array $chains) {}
+    public function __construct(private readonly array $chains)
+    {
+        if ($this->chains === []) {
+            throw new InvalidArgumentException('SequentialChain requires at least one chain.');
+        }
+
+        foreach ($this->chains as $index => $chain) {
+            /** @phpstan-ignore instanceof.alwaysTrue */
+            if (! $chain instanceof ChainContract) {
+                throw new InvalidArgumentException("SequentialChain item at index {$index} must implement ".ChainContract::class.'.');
+            }
+        }
+    }
+
+    public static function compose(ChainContract $chain): ChainFactory
+    {
+        return ChainFactory::from($chain);
+    }
+
+    /**
+     * @param  ChainContract[]  $chains
+     */
+    public static function from(array $chains): self
+    {
+        return new self($chains);
+    }
 
     public function run(array $inputs): mixed
     {
@@ -22,7 +48,7 @@ final class SequentialChain implements ChainContract
             $state[$chain->outputKey()] = $result;
         }
 
-        return $state[last($this->chains)->outputKey()];
+        return $state[$this->lastChain()->outputKey()];
     }
 
     public function stream(array $inputs): \Generator
@@ -41,11 +67,21 @@ final class SequentialChain implements ChainContract
 
     public function inputKeys(): array
     {
-        return $this->chains[0]->inputKeys();
+        return $this->firstChain()->inputKeys();
     }
 
     public function outputKey(): string
     {
-        return last($this->chains)->outputKey();
+        return $this->lastChain()->outputKey();
+    }
+
+    private function firstChain(): ChainContract
+    {
+        return $this->chains[0];
+    }
+
+    private function lastChain(): ChainContract
+    {
+        return $this->chains[array_key_last($this->chains)];
     }
 }

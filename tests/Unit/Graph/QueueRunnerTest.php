@@ -6,9 +6,11 @@ namespace Nexus\AiChain\Tests\Unit\Graph;
 
 use Illuminate\Support\Facades\Bus;
 use Nexus\AiChain\Graph\Runners\QueueRunner;
+use Nexus\AiChain\Graph\State;
 use Nexus\AiChain\Graph\StateGraph;
 use Nexus\AiChain\Jobs\RunGraphNode;
 use Nexus\AiChain\Tests\TestCase;
+use RuntimeException;
 
 if (! class_exists(CounterState::class)) {
     class CounterState extends State
@@ -29,7 +31,7 @@ if (! class_exists(CounterState::class)) {
 
 class QueueRunnerTest extends TestCase
 {
-    public function test_it_dispatches_the_first_node_job()
+    public function test_it_dispatches_the_first_node_job_with_graph_resolver()
     {
         Bus::fake();
 
@@ -39,12 +41,31 @@ class QueueRunnerTest extends TestCase
         $graph->addEdge('start', StateGraph::END);
 
         $compiled = $graph->compile();
-        $runner = new QueueRunner($compiled);
+
+        $this->app->bind('test.queue.graph', fn () => $compiled);
+
+        $runner = new QueueRunner($compiled, 'test.queue.graph');
 
         $runId = $runner->dispatch(new CounterState(0));
 
         $this->assertIsString($runId);
 
         Bus::assertDispatched(RunGraphNode::class);
+    }
+
+    public function test_it_fails_when_graph_is_not_queue_safe_and_no_resolver_is_provided()
+    {
+        $graph = new StateGraph;
+        $graph->addNode('start', fn ($s) => $s);
+        $graph->setEntryPoint('start');
+        $graph->addEdge('start', StateGraph::END);
+
+        $compiled = $graph->compile();
+        $runner = new QueueRunner($compiled);
+
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('Graph is not queue-safe for serialization.');
+
+        $runner->dispatch(new CounterState(0));
     }
 }

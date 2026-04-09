@@ -24,12 +24,36 @@ final class CacheCheckpoint implements Checkpointable
             'timestamp' => now()->toIso8601String(),
         ];
 
-        Cache::store($this->store)->put($this->cacheKey($runId), $history, $this->ttl);
+        $store = Cache::store($this->store);
+
+        if ($this->ttl <= 0) {
+            $store->forever($this->cacheKey($runId), $history);
+
+            return;
+        }
+
+        $store->put($this->cacheKey($runId), $history, $this->ttl);
     }
 
     public function load(string $runId): array
     {
-        return Cache::store($this->store)->get($this->cacheKey($runId), []);
+        $history = Cache::store($this->store)->get($this->cacheKey($runId), []);
+
+        if (! is_array($history)) {
+            return [];
+        }
+
+        return array_values(array_filter($history, function (mixed $entry): bool {
+            if (! is_array($entry)) {
+                return false;
+            }
+
+            return isset($entry['node'], $entry['state'], $entry['class'], $entry['timestamp'])
+                && is_string($entry['node'])
+                && is_array($entry['state'])
+                && is_string($entry['class'])
+                && is_string($entry['timestamp']);
+        }));
     }
 
     public function latest(string $runId): ?array

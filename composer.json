@@ -1,20 +1,42 @@
 {
     "name": "nexus/laravel-ai-chain",
     "description": "LangChain + LangGraph port for Laravel, built on top of laravel/ai",
+    "keywords": [
+        "laravel",
+        "ai",
+        "workflow",
+        "chain",
+        "state-graph",
+        "rag"
+    ],
+    "homepage": "https://github.com/mouadh/nexus/tree/main/laravel-ai-chain",
+    "authors": [
+        {
+            "name": "Nexus Team",
+            "homepage": "https://github.com/mouadh"
+        }
+    ],
     "type": "library",
     "license": "MIT",
     "require": {
         "php": "^8.3",
         "laravel/ai": "^0.4.4",
-        "laravel/framework": "^13.0",
+        "laravel/framework": "^12.0 || ^13.0",
         "laravel/tinker": "^3.0"
     },
     "require-dev": {
-        "pestphp/pest": "*",
-        "orchestra/testbench": "*",
+        "phpstan/phpstan": "^2.1",
+        "pestphp/pest": "^4.0",
+        "orchestra/testbench": "^10.0 || ^11.0",
         "laravel/pail": "^1.2.5",
         "laravel/pint": "^1.27",
         "mockery/mockery": "^1.6"
+    },
+    "scripts": {
+        "test": "vendor/bin/pest",
+        "pint": "vendor/bin/pint --test src",
+        "pint:all": "vendor/bin/pint",
+        "stan": "vendor/bin/phpstan analyse --memory-limit=512M"
     },
     "autoload": {
         "psr-4": {
@@ -32,7 +54,7 @@
                 "Nexus\\AiChain\\AiChainServiceProvider"
             ],
             "aliases": {
-                "AiChain": "Nexus\\AiChain\\Facades\\Chain"
+                "AiChain": "Nexus\\AiChain\\Facades\\AiChain"
             }
         }
     },
@@ -42,5 +64,9 @@
         "allow-plugins": {
             "pestphp/pest-plugin": true
         }
+    },
+    "support": {
+        "issues": "https://github.com/mouadh/nexus/issues",
+        "source": "https://github.com/mouadh/nexus/tree/main/laravel-ai-chain"
     }
 }

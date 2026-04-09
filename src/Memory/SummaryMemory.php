@@ -2,6 +2,7 @@
 
 namespace Nexus\AiChain\Memory;
 
+use InvalidArgumentException;
 use Nexus\AiChain\Contracts\Memory;
 
 /**
@@ -20,7 +21,16 @@ final class SummaryMemory implements Memory
     public function __construct(
         private readonly mixed $summarizer,
         private readonly int $summarizeAfter = 10,
-    ) {}
+    ) {
+        /** @phpstan-ignore function.alreadyNarrowedType */
+        if (! is_callable($this->summarizer)) {
+            throw new InvalidArgumentException('summarizer must be callable.');
+        }
+
+        if ($this->summarizeAfter < 2) {
+            throw new InvalidArgumentException('summarizeAfter must be at least 2.');
+        }
+    }
 
     public function add(string $role, string $content): void
     {
@@ -59,10 +69,26 @@ final class SummaryMemory implements Memory
 
     private function compress(): void
     {
-        $toCompress = array_splice($this->messages, 0, $this->summarizeAfter / 2); // Keep half
+        $chunkSize = max(1, intdiv($this->summarizeAfter, 2));
+        $toCompress = array_slice($this->messages, 0, $chunkSize);
+        $remaining = array_slice($this->messages, $chunkSize);
+
         $conversation = $this->messagesAsString($toCompress);
 
-        $this->summary = ($this->summarizer)($conversation, $this->summary);
+        try {
+            $nextSummary = ($this->summarizer)($conversation, $this->summary);
+        } catch (\Throwable) {
+            return;
+        }
+
+        $nextSummary = trim((string) $nextSummary);
+
+        if ($nextSummary === '') {
+            return;
+        }
+
+        $this->summary = $nextSummary;
+        $this->messages = $remaining;
     }
 
     private function messagesAsString(array $messages): string
