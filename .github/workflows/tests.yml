@@ -14,9 +14,6 @@ on:
 jobs:
   quality:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: laravel-ai-chain
     strategy:
       fail-fast: false
       matrix:
