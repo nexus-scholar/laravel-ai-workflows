@@ -10,7 +10,7 @@ use Laravel\Ai\Contracts\HasTools;
 use Laravel\Ai\Enums\Lab;
 use Laravel\Ai\Promptable;
 
-class ProviderOptionsAgent implements Agent, Conversational, HasTools, HasMiddleware, HasProviderOptions
+class ProviderOptionsAgent implements Agent, Conversational, HasMiddleware, HasProviderOptions, HasTools
 {
     use Promptable;
 
@@ -27,8 +27,8 @@ class ProviderOptionsAgent implements Agent, Conversational, HasTools, HasMiddle
     protected $providerOptionsResolver;
 
     /**
-     * @param array<string, array<string, mixed>> $providerOptions
-     * @param (callable(Lab|string, array<string, mixed>, Agent): array<string, mixed>)|null $providerOptionsResolver
+     * @param  array<string, array<string, mixed>>  $providerOptions
+     * @param  (callable(Lab|string, array<string, mixed>, Agent): array<string, mixed>)|null  $providerOptionsResolver
      */
     public function __construct(
         protected readonly Agent $agent,
@@ -100,4 +100,3 @@ class ProviderOptionsAgent implements Agent, Conversational, HasTools, HasMiddle
         return $options;
     }
 }
-
