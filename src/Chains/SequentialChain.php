@@ -66,7 +66,7 @@ final class SequentialChain implements ChainContract
     }
 
     /**
-     * @param array<string, mixed> $inputs
+     * @param  array<string, mixed>  $inputs
      * @return iterable<int|string, mixed>
      */
     public function streamEvents(array $inputs): iterable

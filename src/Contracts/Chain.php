@@ -19,7 +19,7 @@ interface Chain
     /**
      * Stream native Laravel AI SDK events for advanced consumers.
      *
-     * @param array<string, mixed> $inputs
+     * @param  array<string, mixed>  $inputs
      * @return iterable<int|string, mixed>
      */
     public function streamEvents(array $inputs): iterable;

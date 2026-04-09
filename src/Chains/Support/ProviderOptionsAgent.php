@@ -93,7 +93,6 @@ class ProviderOptionsAgent implements Agent, Conversational, HasMiddleware, HasP
         if ($this->providerOptionsResolver !== null) {
             $resolved = ($this->providerOptionsResolver)($provider, $options, $this->agent);
 
-
             $options = array_replace($options, $resolved);
         }
 
