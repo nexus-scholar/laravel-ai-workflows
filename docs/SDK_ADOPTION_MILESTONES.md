@@ -36,10 +36,13 @@ This checklist tracks the Laravel AI SDK adoption roadmap for `laravel-ai-workfl
 
 ## M1.5 - Streaming Contract and Tool Interop
 
-- [ ] M1.5-PR1 (1 day): Streaming contract ADR
+- [x] M1.5-PR1 (1 day): Streaming contract ADR
   - Scope: decide stable API for raw events vs text deltas.
+  - Progress:
+    - [x] Decision recorded in `docs/ADR-0001-streaming-contract.md`.
+    - [x] Contract keeps `stream()` backward compatible and reserves rich events for a dedicated API in M1.5-PR2.
   - Acceptance tests:
-    - Existing `stream()` behavior remains backward compatible.
+    - `vendor/bin/pest --configuration=phpunit.xml tests/Unit/Chains/ChainTest.php --filter="streams text deltas from laravel ai stream events"`
 - [ ] M1.5-PR2 (1-2 days): Event-preserving streaming implementation
   - Scope: expose SDK event metadata stream path.
   - Acceptance tests:
